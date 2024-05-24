@@ -6,7 +6,7 @@
 
     <groupId>cn.mimiknight.kuca</groupId>
     <artifactId>kuca-parent</artifactId>
-    <version>${revision}</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>kuca-parent</name>
     <description>kuca framework</description>
@@ -96,9 +96,26 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
                 <version>${versions-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>version-set</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>set</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>version-revert</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>revert</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
                     <generateBackupPoms>true</generateBackupPoms>
                     <newVersion>${revision}</newVersion>
+                    <changeRecorderFormat>xml</changeRecorderFormat>
                     <changeRecorderOutputFile>${project.basedir}/versions-changes.xml</changeRecorderOutputFile>
                 </configuration>
             </plugin>
