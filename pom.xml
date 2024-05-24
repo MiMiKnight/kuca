@@ -93,7 +93,7 @@
     <!--build-->
     <build>
         <plugins>
-            <!--aven-clean-plugin-->
+            <!--maven-clean-plugin-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
@@ -101,7 +101,7 @@
                 <configuration>
                     <filesets>
                         <fileset>
-                            <directory>${project.basedir}/**/.build</directory>
+                            <directory>${project.basedir}/**/pom.xml.versionsBackup</directory>
                         </fileset>
                     </filesets>
                 </configuration>
@@ -117,6 +117,13 @@
                         <phase>compile</phase>
                         <goals>
                             <goal>set</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>version-revert</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>revert</goal>
                         </goals>
                     </execution>
                 </executions>
