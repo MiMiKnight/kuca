@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cn.mimiknight.kuca</groupId>
+    <artifactId>kuca-parent</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+    <name>kuca-parent</name>
+    <description>kuca framework</description>
+
+    <properties>
+        <!--revision 项目版本号-->
+        <revision>1.0.0-SNAPSHOT</revision>
+        <!--spring-boot-->
+        <spring-boot.version>3.0.2</spring-boot.version>
+        <!--lombok-->
+        <lombok.version>1.18.24</lombok.version>
+        <!--commons-lang3-->
+        <commons-lang3.version>3.14.0</commons-lang3.version>
+        <!--commons-collections4-->
+        <commons-collections4.version>4.4</commons-collections4.version>
+        <!--mapstruct-->
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
+
+        <!-- Maven插件版本 -->
+        <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
+        <duplicate-finder-maven-plugin.version>2.0.0</duplicate-finder-maven-plugin.version>
+    </properties>
+
+    <modules>
+        <module>proto-project/kuca-detach</module>
+        <module>proto-project/kuca-proto-dependencies</module>
+        <module>spring-project/kuca-detach-request-spring</module>
+        <module>spring-project/kuca-spring-dependencies</module>
+        <module>spring-boot-project/kuca-spring-boot-autoconfigure</module>
+        <module>spring-boot-project/kuca-errorcode-boot-starter</module>
+        <module>spring-boot-project/kuca-appeasy-boot-starter</module>
+        <module>spring-boot-project/kuca-spring-boot-dependencies</module>
+        <module>kuca-dependencies</module>
+    </modules>
+
+    <!--依赖管理-->
+    <dependencyManagement>
+        <dependencies>
+            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-collections4.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct-processor -->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
+                <scope>provided</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!--build-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>${versions-maven-plugin.version}</version>
+                <configuration>
+                    <generateBackupPoms>true</generateBackupPoms>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.basepom.maven</groupId>
+                <artifactId>duplicate-finder-maven-plugin</artifactId>
+                <version>${duplicate-finder-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
+
+</project>
