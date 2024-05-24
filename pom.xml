@@ -120,15 +120,29 @@
                 <version>${maven-enforcer-plugin.version}</version>
                 <executions>
                     <execution>
-                        <!--检测依赖重复引入-->
-                        <id>no-duplicate-declared-dependencies</id>
+                        <id>enforce</id>
                         <phase>validate</phase>
                         <goals>
                             <goal>enforce</goal>
                         </goals>
                         <configuration>
                             <rules>
+                                <!--检查是否存在重复的依赖项-->
                                 <banDuplicatePomDependencyVersions/>
+                                <!--限制编译的JDK版本-->
+                                <requireJavaVersion>
+                                    <version>[17.0.8,17.0.10]</version>
+                                </requireJavaVersion>
+                                <!--限制编译JDK的品牌-->
+                                <requireJavaVendor>
+                                    <includes>
+                                        <include>Oracle Corporation</include>
+                                    </includes>
+                                </requireJavaVendor>
+                                <!--限制编译Maven版本-->
+                                <requireMavenVersion>
+                                    <version>[3.9.0,3.9.6]</version>
+                                </requireMavenVersion>
                             </rules>
                         </configuration>
                     </execution>
