@@ -28,6 +28,7 @@
         <!-- Maven插件版本 -->
         <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
         <duplicate-finder-maven-plugin.version>2.0.0</duplicate-finder-maven-plugin.version>
+        <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version>
     </properties>
 
     <modules>
@@ -106,10 +107,30 @@
                 <executions>
                     <execution>
                         <id>default</id>
-                        <phase>verify</phase>
+                        <phase>compile</phase>
                         <goals>
                             <goal>check</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${maven-enforcer-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <!--检测依赖重复引入-->
+                        <id>no-duplicate-declared-dependencies</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <banDuplicatePomDependencyVersions/>
+                            </rules>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
