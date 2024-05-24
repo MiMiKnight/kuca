@@ -6,7 +6,7 @@
 
     <groupId>cn.mimiknight.kuca</groupId>
     <artifactId>kuca-parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>${revision}</version>
     <packaging>pom</packaging>
     <name>kuca-parent</name>
     <description>kuca framework</description>
@@ -104,7 +104,7 @@
                             <goal>set</goal>
                         </goals>
                     </execution>
-                    <execution>
+                 <execution>
                         <id>version-revert</id>
                         <phase>clean</phase>
                         <goals>
