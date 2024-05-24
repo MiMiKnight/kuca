@@ -114,16 +114,9 @@
                 <executions>
                     <execution>
                         <id>version-set</id>
-                        <phase>compile</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>set</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>version-revert</id>
-                        <phase>clean</phase>
-                        <goals>
-                            <goal>revert</goal>
                         </goals>
                     </execution>
                 </executions>
