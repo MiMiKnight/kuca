@@ -29,7 +29,6 @@
         <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
         <duplicate-finder-maven-plugin.version>2.0.0</duplicate-finder-maven-plugin.version>
         <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version>
-        <maven-clean-plugin.version>3.3.2</maven-clean-plugin.version>
     </properties>
 
     <modules>
@@ -93,33 +92,11 @@
     <!--build-->
     <build>
         <plugins>
-            <!--maven-clean-plugin-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>${maven-clean-plugin.version}</version>
-                <configuration>
-                    <filesets>
-                        <fileset>
-                            <directory>${project.basedir}/**/pom.xml.versionsBackup</directory>
-                        </fileset>
-                    </filesets>
-                </configuration>
-            </plugin>
             <!--versions-maven-plugin-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
                 <version>${versions-maven-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>version-set</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>set</goal>
-                        </goals>
-                    </execution>
-                </executions>
                 <configuration>
                     <generateBackupPoms>true</generateBackupPoms>
                     <newVersion>${revision}</newVersion>
