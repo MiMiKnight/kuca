@@ -98,6 +98,8 @@
                 <version>${versions-maven-plugin.version}</version>
                 <configuration>
                     <generateBackupPoms>true</generateBackupPoms>
+                    <newVersion>${revision}</newVersion>
+                    <changeRecorderOutputFile>${project.basedir}/versions-changes.xml</changeRecorderOutputFile>
                 </configuration>
             </plugin>
             <plugin>
