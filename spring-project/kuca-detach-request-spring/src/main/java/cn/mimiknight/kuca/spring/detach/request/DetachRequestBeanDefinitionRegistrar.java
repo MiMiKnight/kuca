@@ -2,7 +2,9 @@ package cn.mimiknight.kuca.spring.detach.request;
 
 import cn.mimiknight.kuca.proto.detach.DetachManager;
 import cn.mimiknight.kuca.proto.detach.DetachManagerFactory;
+import cn.mimiknight.kuca.proto.detach.executor.DetachHandleExecutor;
 import cn.mimiknight.kuca.proto.detach.handler.DetachHandler;
+import cn.mimiknight.kuca.spring.detach.request.executor.RequestDetachHandleExecutor;
 import cn.mimiknight.kuca.spring.detach.request.handler.RequestDetachHandler;
 import lombok.NonNull;
 import org.apache.commons.collections4.CollectionUtils;
@@ -26,24 +28,44 @@ public class DetachRequestBeanDefinitionRegistrar implements ImportBeanDefinitio
     public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata,
                                         BeanDefinitionRegistry registry,
                                         BeanNameGenerator importBeanNameGenerator) {
-        DetachManager manager = DetachManagerFactory.create();
+        // 实例化DetachManager
+        DetachManagerFactory.create();
         String locationPattern = "classpath:**/*.class";
-        List<Class<RequestDetachHandler>> handlerClasses = scanPackageGetClasses(locationPattern, RequestDetachHandler.class);
-        if (CollectionUtils.isEmpty(handlerClasses)) {
+        List<Class<?>> classes = scanPackageGetClasses(locationPattern);
+        List<Class<RequestDetachHandler>> handlerClasses = getScanClasses(classes, RequestDetachHandler.class);
+        initHandlerMappings(handlerClasses);
+
+        List<Class<RequestDetachHandleExecutor>> executorClasses = getScanClasses(classes, RequestDetachHandleExecutor.class);
+        initExecutorMappings(executorClasses);
+    }
+
+    private void initHandlerMappings(List<Class<RequestDetachHandler>> classes) {
+        if (CollectionUtils.isEmpty(classes)) {
             return;
         }
         DetachHandler handler = new DetachHandler() {
         };
-        for (Class<RequestDetachHandler> clazz : handlerClasses) {
-            manager.getHandlerMappings().put(clazz, handler);
+        for (Class<RequestDetachHandler> clazz : classes) {
+            DetachManagerFactory.getManager().getHandlerMappings().put(clazz, handler);
         }
     }
 
-    private <T> List<Class<T>> scanPackageGetClasses(@NonNull String locationPattern, @NonNull Class<T> dataType) {
+    private void initExecutorMappings(List<Class<RequestDetachHandleExecutor>> classes) {
+        if (CollectionUtils.isEmpty(classes)) {
+            return;
+        }
+        DetachHandleExecutor executor = new DetachHandleExecutor() {
+        };
+        for (Class<RequestDetachHandleExecutor> clazz : classes) {
+            DetachManagerFactory.getManager().getExecutorMappings().put(clazz, executor);
+        }
+    }
+
+    private List<Class<?>> scanPackageGetClasses(@NonNull String locationPattern) {
         PathMatchingResourcePatternResolver patternResolver = new PathMatchingResourcePatternResolver();
         CachingMetadataReaderFactory metadataReaderFactory = new CachingMetadataReaderFactory();
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-        List<Class<T>> classes = new ArrayList<>();
+        List<Class<?>> classes = new ArrayList<>();
 
         try {
             Resource[] resources = patternResolver.getResources(locationPattern);
@@ -54,13 +76,25 @@ public class DetachRequestBeanDefinitionRegistrar implements ImportBeanDefinitio
                 MetadataReader reader = metadataReaderFactory.getMetadataReader(resource);
                 String className = reader.getClassMetadata().getClassName();
                 Class<?> loadedClass = classLoader.loadClass(className);
-                if (dataType.isAssignableFrom(loadedClass)) {
-                    classes.add((Class<T>) loadedClass);
-                }
+                classes.add(loadedClass);
             }
         } catch (IOException | ClassNotFoundException e) {
             return classes;
         }
         return classes;
     }
+
+    private <T> List<Class<T>> getScanClasses(@NonNull List<Class<?>> classes, @NonNull Class<T> dataType) {
+        ArrayList<Class<T>> list = new ArrayList<>();
+        if (CollectionUtils.isEmpty(classes)) {
+            return list;
+        }
+        for (Class<?> clazz : classes) {
+            if (dataType.isAssignableFrom(clazz)) {
+                list.add((Class<T>) clazz);
+            }
+        }
+        return list;
+    }
+
 }
