@@ -2,6 +2,7 @@ package cn.mimiknight.kuca.spring.detach.request;
 
 import cn.mimiknight.kuca.proto.detach.DetachManager;
 import cn.mimiknight.kuca.proto.detach.DetachManagerFactory;
+import cn.mimiknight.kuca.proto.detach.handler.DetachHandler;
 import cn.mimiknight.kuca.spring.detach.request.handler.RequestDetachHandler;
 import lombok.NonNull;
 import org.apache.commons.collections4.CollectionUtils;
@@ -31,8 +32,10 @@ public class DetachRequestBeanDefinitionRegistrar implements ImportBeanDefinitio
         if (CollectionUtils.isEmpty(handlerClasses)) {
             return;
         }
+        DetachHandler handler = new DetachHandler() {
+        };
         for (Class<RequestDetachHandler> clazz : handlerClasses) {
-            manager.getHandlerMappings().put(clazz, null);
+            manager.getHandlerMappings().put(clazz, handler);
         }
     }
 
