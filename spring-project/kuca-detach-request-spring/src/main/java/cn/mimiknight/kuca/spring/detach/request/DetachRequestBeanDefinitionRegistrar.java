@@ -30,7 +30,7 @@ public class DetachRequestBeanDefinitionRegistrar implements ImportBeanDefinitio
                                         BeanNameGenerator importBeanNameGenerator) {
         // 实例化DetachManager
         DetachManagerFactory.create();
-        String locationPattern = "classpath:**/*.class";
+        String locationPattern = "classpath*:**/*.class";
         List<Class<?>> classes = scanPackageGetClasses(locationPattern);
         List<Class<RequestDetachHandler>> handlerClasses = getScanClasses(classes, RequestDetachHandler.class);
         initHandlerMappings(handlerClasses);
