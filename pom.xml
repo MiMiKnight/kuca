@@ -12,10 +12,13 @@
     <description>kuca framework</description>
 
     <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--revision 项目版本号-->
         <revision>1.0.0-SNAPSHOT</revision>
         <!--spring-boot-->
-        <spring-boot.version>3.0.2</spring-boot.version>
+        <spring-boot.version>2.7.18</spring-boot.version>
         <!--lombok-->
         <lombok.version>1.18.24</lombok.version>
         <!--commons-lang3-->
@@ -27,9 +30,10 @@
 
         <!-- Maven插件版本 -->
         <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
-        <duplicate-finder-maven-plugin.version>2.0.0</duplicate-finder-maven-plugin.version>
+        <duplicate-finder-maven-plugin.version>1.5.1</duplicate-finder-maven-plugin.version>
         <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
+        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
     </properties>
 
     <modules>
@@ -101,8 +105,6 @@
                 <configuration>
                     <generateBackupPoms>true</generateBackupPoms>
                     <newVersion>${revision}</newVersion>
-                    <changeRecorderFormat>xml</changeRecorderFormat>
-                    <changeRecorderOutputFile>${project.basedir}/versions-changes.xml</changeRecorderOutputFile>
                 </configuration>
             </plugin>
             <!--duplicate-finder-maven-plugin-->
@@ -138,7 +140,7 @@
                                 <banDuplicatePomDependencyVersions/>
                                 <!--限制编译的JDK版本-->
                                 <requireJavaVersion>
-                                    <version>[17.0.8,17.0.10]</version>
+                                    <version>[1.8.0_202,1.8.0_202]</version>
                                 </requireJavaVersion>
                                 <!--限制编译JDK的品牌-->
                                 <requireJavaVendor>
@@ -170,6 +172,23 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--maven-jar-plugin-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <showWarnings>true</showWarnings>
+                    <compilerArgs>
+                        <arg>-Xlint:all</arg>
+                    </compilerArgs>
+                </configuration>
+
+            </plugin>
+
         </plugins>
 
     </build>
