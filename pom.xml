@@ -12,6 +12,10 @@
     <description>kuca framework</description>
 
     <properties>
+        <jdk.min.version>1.8.0-202</jdk.min.version>
+        <jdk.max.version>1.8.0-202</jdk.max.version>
+        <maven.min.version>3.9.0</maven.min.version>
+        <maven.max.version>3.9.6</maven.max.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -140,7 +144,7 @@
                                 <banDuplicatePomDependencyVersions/>
                                 <!--限制编译的JDK版本-->
                                 <requireJavaVersion>
-                                    <version>[1.8.0_202,1.8.0_202]</version>
+                                    <version>[${jdk.min.version},${jdk.max.version}]</version>
                                 </requireJavaVersion>
                                 <!--限制编译JDK的品牌-->
                                 <requireJavaVendor>
@@ -150,7 +154,7 @@
                                 </requireJavaVendor>
                                 <!--限制编译Maven版本-->
                                 <requireMavenVersion>
-                                    <version>[3.9.0,3.9.6]</version>
+                                    <version>[${maven.min.version},${maven.max.version}]</version>
                                 </requireMavenVersion>
                             </rules>
                         </configuration>
@@ -182,6 +186,7 @@
                     <target>${maven.compiler.target}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <showWarnings>true</showWarnings>
+                    <verbose>true</verbose>
                     <compilerArgs>
                         <arg>-Xlint:all</arg>
                     </compilerArgs>
