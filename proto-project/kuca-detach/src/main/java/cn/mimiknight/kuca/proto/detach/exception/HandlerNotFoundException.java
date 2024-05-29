@@ -1,7 +1,5 @@
 package cn.mimiknight.kuca.proto.detach.exception;
 
-import java.io.Serial;
-
 /**
  * handler not found exception
  *
@@ -10,7 +8,6 @@ import java.io.Serial;
  */
 public class HandlerNotFoundException extends RuntimeException {
 
-    @Serial
     private static final long serialVersionUID = 4037785770038127776L;
 
     public HandlerNotFoundException() {

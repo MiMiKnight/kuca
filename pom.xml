@@ -186,7 +186,6 @@
                     <target>${maven.compiler.target}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <showWarnings>true</showWarnings>
-                    <verbose>true</verbose>
                     <compilerArgs>
                         <arg>-Xlint:all</arg>
                     </compilerArgs>
