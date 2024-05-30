@@ -43,7 +43,6 @@
     <modules>
         <module>proto-project/kuca-detach</module>
         <module>proto-project/kuca-proto-dependencies</module>
-        <module>spring-project/kuca-detach-request-spring</module>
         <module>spring-project/kuca-spring-dependencies</module>
         <module>spring-boot-project/kuca-spring-boot-autoconfigure</module>
         <module>spring-boot-project/kuca-errorcode-boot-starter</module>
