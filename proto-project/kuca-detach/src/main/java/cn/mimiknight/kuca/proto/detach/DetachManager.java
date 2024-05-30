@@ -1,11 +1,9 @@
 package cn.mimiknight.kuca.proto.detach;
 
 import cn.mimiknight.kuca.proto.detach.executor.DetachHandleExecutor;
-import cn.mimiknight.kuca.proto.detach.filter.DetachFilter;
 import cn.mimiknight.kuca.proto.detach.handler.DetachHandler;
 import lombok.Getter;
 
-import java.util.LinkedList;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -25,13 +23,9 @@ public class DetachManager {
     @Getter
     private final ConcurrentHashMap<Class<? extends DetachHandleExecutor>, DetachHandleExecutor> executorMappings;
 
-    @Getter
-    private final ConcurrentHashMap<Class<? extends DetachHandler>, LinkedList<DetachFilter>> filterMappings;
-
     public DetachManager() {
         this.handlerMappings = new ConcurrentHashMap<>(INIT_CAPACITY);
         this.executorMappings = new ConcurrentHashMap<>(INIT_CAPACITY);
-        this.filterMappings = new ConcurrentHashMap<>(INIT_CAPACITY);
     }
 
     /**
@@ -65,29 +59,6 @@ public class DetachManager {
             manager = DetachManagerFactory.create();
         }
         manager.getExecutorMappings().put(executorDataType, executor);
-        return manager;
-    }
-
-    /**
-     * put filter mappings
-     *
-     * @param filterDataType filter data type
-     * @param filter         filter
-     * @return {@link DetachManager }
-     */
-    public synchronized DetachManager putFilterMappings(Class<? extends DetachHandler> filterDataType,
-                                                        DetachFilter filter) {
-        DetachManager manager = DetachManagerFactory.getManager();
-        if (Objects.isNull(manager)) {
-            manager = DetachManagerFactory.create();
-        }
-        manager.getFilterMappings().compute(filterDataType, (k, v) -> {
-            if (Objects.isNull(v)) {
-                v = new LinkedList<>();
-            }
-            v.add(filter);
-            return v;
-        });
         return manager;
     }
 

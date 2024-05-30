@@ -2,8 +2,7 @@ package cn.mimiknight.kuca.proto.detach.utils;
 
 import cn.mimiknight.kuca.proto.detach.DetachManager;
 import cn.mimiknight.kuca.proto.detach.DetachManagerFactory;
-import cn.mimiknight.kuca.proto.detach.exception.HandlerExecutorNotFoundException;
-import cn.mimiknight.kuca.proto.detach.exception.HandlerNotFoundException;
+import cn.mimiknight.kuca.proto.detach.exception.DetachException;
 import cn.mimiknight.kuca.proto.detach.executor.DetachHandleExecutor;
 import cn.mimiknight.kuca.proto.detach.handler.DetachHandler;
 
@@ -17,6 +16,9 @@ import java.util.Objects;
  */
 public final class DetachUtil {
 
+    private DetachUtil() {
+    }
+
     /**
      * check handler
      *
@@ -29,7 +31,7 @@ public final class DetachUtil {
         if (Objects.isNull(handler)) {
             String format = "Handler not found which is '%s'";
             String tip = String.format(format, expectHandlerType);
-            throw new HandlerNotFoundException(tip);
+            throw new DetachException(tip);
         }
         if (!handlerDataType.isInstance(handler)) {
             String actualHandlerType = handler.getClass().getCanonicalName();
@@ -51,7 +53,7 @@ public final class DetachUtil {
         if (Objects.isNull(executor)) {
             String format = "Handler executor not found which is '%s'";
             String tip = String.format(format, executorHandlerType);
-            throw new HandlerExecutorNotFoundException(tip);
+            throw new DetachException(tip);
         }
         if (!executorDataType.isInstance(executor)) {
             String actualExecutorType = executor.getClass().getCanonicalName();
@@ -62,12 +64,22 @@ public final class DetachUtil {
     }
 
     /**
+     * check detach manager
+     */
+    public static void checkDetachManager() {
+        if (Objects.isNull(DetachManagerFactory.getManager())) {
+            throw new DetachException("DetachManager object is not exist,please create it first.");
+        }
+    }
+
+    /**
      * get handler
      *
      * @param handlerDataType handler data type
      * @return {@link H }
      */
     public static <H extends DetachHandler> H getHandler(Class<H> handlerDataType) {
+        checkDetachManager();
         DetachManager manager = DetachManagerFactory.getManager();
         DetachHandler handler = manager.getHandlerMappings().get(handlerDataType);
         checkHandler(handler, handlerDataType);
@@ -81,6 +93,7 @@ public final class DetachUtil {
      * @return {@link E }
      */
     public static <E extends DetachHandleExecutor> E getExecutor(Class<E> executorDataType) {
+        checkDetachManager();
         DetachManager manager = DetachManagerFactory.getManager();
         DetachHandleExecutor executor = manager.getExecutorMappings().get(executorDataType);
         checkExecutor(executor, executorDataType);
