@@ -4,6 +4,6 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 @AutoConfiguration
-@EnableConfigurationProperties(value = {KucaEcologyProperties.class})
-public class KucaEcologyAutoConfiguration {
+@EnableConfigurationProperties(value = {KucaDetachProperties.class})
+public class KucaDetachAutoConfiguration {
 }

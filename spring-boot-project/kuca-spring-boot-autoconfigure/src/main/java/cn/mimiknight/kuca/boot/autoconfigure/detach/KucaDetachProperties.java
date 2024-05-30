@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Getter
 @Setter
-@ConfigurationProperties(prefix = "kuca.ecology", ignoreInvalidFields = true)
-public class KucaEcologyProperties {
+@ConfigurationProperties(prefix = "kuca.detach", ignoreInvalidFields = true)
+public class KucaDetachProperties {
 
 }
