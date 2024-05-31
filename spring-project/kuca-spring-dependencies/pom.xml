@@ -17,7 +17,13 @@
     <description>kuca-spring-dependencies</description>
 
     <dependencyManagement>
-
+        <dependencies>
+            <dependency>
+                <groupId>cn.mimiknight.kuca</groupId>
+                <artifactId>kuca-dispatch-spring</artifactId>
+                <version>${revision}</version>
+            </dependency>
+        </dependencies>
     </dependencyManagement>
 
 </project>

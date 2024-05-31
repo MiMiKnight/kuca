@@ -10,20 +10,12 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>kuca-detach-boot-starter</artifactId>
+    <artifactId>kuca-dispatch-spring</artifactId>
     <packaging>jar</packaging>
-    <name>kuca-detach-boot-starter</name>
-    <description>kuca-detach-boot-starter</description>
+    <name>kuca-dispatch-spring</name>
+    <description>kuca-dispatch-spring</description>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure-processor</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

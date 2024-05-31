@@ -3,7 +3,6 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <groupId>cn.mimiknight.kuca</groupId>
         <artifactId>kuca-parent</artifactId>
@@ -11,10 +10,10 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>kuca-spring-boot-autoconfigure</artifactId>
+    <artifactId>kuca-dispatch-boot-starter</artifactId>
     <packaging>jar</packaging>
-    <name>kuca-spring-boot-autoconfigure</name>
-    <description>kuca-spring-boot-autoconfigure</description>
+    <name>kuca-dispatch-boot-starter</name>
+    <description>kuca-dispatch-boot-starter</description>
 
     <dependencies>
         <dependency>
@@ -29,11 +28,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>cn.mimiknight.kuca</groupId>
-            <artifactId>kuca-dispatch-spring</artifactId>
-            <version>${revision}</version>
         </dependency>
     </dependencies>
 

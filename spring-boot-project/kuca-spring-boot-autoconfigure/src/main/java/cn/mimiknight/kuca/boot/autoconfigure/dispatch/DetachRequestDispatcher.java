@@ -1,4 +1,4 @@
-package cn.mimiknight.kuca.boot.autoconfigure.detach;
+package cn.mimiknight.kuca.boot.autoconfigure.dispatch;
 
 /**
  * detach request dispatcher

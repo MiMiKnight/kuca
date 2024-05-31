@@ -1,4 +1,4 @@
-package cn.mimiknight.kuca.boot.autoconfigure.detach.model;
+package cn.mimiknight.kuca.boot.autoconfigure.dispatch.model;
 
 /**
  * response validator
