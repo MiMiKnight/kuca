@@ -9,4 +9,9 @@ package cn.mimiknight.kuca.proto.errorcode;
  */
 public class ErrorCodeManager {
 
+    /**
+     * error code xml config file location
+     */
+    private String errorCodeConfigLocation = "classpath:error-code-config.xml";
+
 }
