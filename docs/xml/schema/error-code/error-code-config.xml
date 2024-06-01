@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xmlns="https://kuca.mimiknight.cn/xml/schema/error-code"
+               xsi:schemaLocation="https://kuca.mimiknight.cn/xml/schema/error-code error-code-config-1.0.xsd">
+
+    <properties>
+        <code.prefix.enable>true</code.prefix.enable>
+        <code.prefix>HD.201</code.prefix>
+    </properties>
+
+    <types>
+        <type id="type01" status="200">OK</type>
+        <type id="type02" status="500">System Exception</type>
+        <type id="type03" status="404">Resource Not Found</type>
+        <type id="type04" status="500">Business Exception</type>
+        <type id="type05" status="500">Database Exception</type>
+        <type id="type06" status="400">Param Valid Exception</type>
+    </types>
+
+    <modules>
+        <!--system-->
+        <module id="system">
+            <!--默认OK响应错误码-->
+            <code id="000000" type="type01">Ok response</code>
+            <!--默认Bad响应错误码-->
+            <code id="999999" type="type02">Bad response</code>
+            <code id="999998" type="type03">The api path not found</code>
+            <code id="999997" type="type04">The SQL syntax error</code>
+        </module>
+        <!--biz-->
+        <module id="biz">
+            <code id="110000" type="type01">111</code>
+            <code id="110001" type="type01">111</code>
+        </module>
+    </modules>
+
+</configuration>
