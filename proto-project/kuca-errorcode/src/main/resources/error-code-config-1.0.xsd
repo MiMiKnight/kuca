@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://kuca.mimiknight.cn/xml/schema/error-code"
+           xmlns="https://kuca.mimiknight.cn/xml/schema/error-code"
+           elementFormDefault="qualified">
+
+    <!-- definition of simple elements -->
+    <xs:element name="code.prefix.enable" default="true">
+        <xs:simpleType>
+            <xs:restriction base="xs:boolean">
+                <xs:enumeration value="true"/>
+                <xs:enumeration value="false"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="code.prefix" type="xs:string" default="xxx"/>
+
+    <!-- definition of complex elements -->
+    <xs:element name="configuration">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="properties"/>
+                <xs:element ref="types"/>
+                <xs:element ref="modules"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="properties" type="xs:complexType">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="code.prefix.enable"/>
+                <xs:element ref="code.prefix"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="types" type="xs:complexType">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="type" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="type" type="xs:complexType">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="id" type="xs:string" use="required"/>
+                    <xs:attribute name="status" type="xs:integer"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="modules" type="xs:complexType">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="module" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="module" type="xs:complexType">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="code" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="code" type="xs:complexType">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="id" type="xs:string" use="required"/>
+                    <xs:attribute name="type" type="xs:string" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
