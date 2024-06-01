@@ -23,6 +23,11 @@
                 <artifactId>kuca-detach</artifactId>
                 <version>${revision}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.mimiknight.kuca</groupId>
+                <artifactId>kuca-errorcode</artifactId>
+                <version>${revision}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
