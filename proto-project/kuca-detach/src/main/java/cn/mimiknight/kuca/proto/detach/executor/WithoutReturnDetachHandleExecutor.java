@@ -5,6 +5,12 @@ import cn.mimiknight.kuca.proto.detach.handler.WithoutParamWithoutReturnDetachHa
 import cn.mimiknight.kuca.proto.detach.utils.DetachUtil;
 import lombok.NonNull;
 
+/**
+ * without return detach handle executor
+ *
+ * @author MiMiKnight victor2015yhm@gmail.com
+ * @date 2024-08-30 19:26:05
+ */
 public class WithoutReturnDetachHandleExecutor implements DetachHandleExecutor {
 
     /**

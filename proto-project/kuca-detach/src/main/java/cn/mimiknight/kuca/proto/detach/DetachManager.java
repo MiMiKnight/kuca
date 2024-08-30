@@ -13,14 +13,13 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author MiMiKnight victor2015yhm@gmail.com
  * @since 2024-05-22 20:24:15
  */
+@Getter
 public class DetachManager {
 
     private static final int INIT_CAPACITY = 128;
 
-    @Getter
     private final ConcurrentHashMap<Class<? extends DetachHandler>, DetachHandler> handlerMappings;
 
-    @Getter
     private final ConcurrentHashMap<Class<? extends DetachHandleExecutor>, DetachHandleExecutor> executorMappings;
 
     public DetachManager() {
