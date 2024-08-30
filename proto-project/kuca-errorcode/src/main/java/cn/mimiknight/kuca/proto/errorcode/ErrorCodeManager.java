@@ -14,4 +14,9 @@ public class ErrorCodeManager {
      */
     private String errorCodeConfigLocation = "classpath:error-code-config.xml";
 
+    /**
+     * config file hash value
+     */
+    private String configFileHash = "";
+
 }
