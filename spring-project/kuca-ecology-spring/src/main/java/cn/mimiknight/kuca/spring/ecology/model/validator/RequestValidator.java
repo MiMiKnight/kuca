@@ -1,4 +1,4 @@
-package cn.mimiknight.kuca.boot.autoconfigure.ecology.model;
+package cn.mimiknight.kuca.spring.ecology.model.validator;
 
 /**
  * request validator
