@@ -9,7 +9,7 @@ import cn.mimiknight.kuca.proto.detach.utils.DetachUtil;
  * @author MiMiKnight victor2015yhm@gmail.com
  * @since 2024-05-23 08:06:48
  */
-public abstract class GeneralDetachHandleDispatcher {
+public abstract class AbstractGeneralDetachHandleDispatcher {
 
     /**
      * get executor

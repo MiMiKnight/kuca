@@ -8,7 +8,7 @@ import cn.mimiknight.kuca.proto.detach.executor.DetachHandleExecutor;
  * @author MiMiKnight victor2015yhm@gmail.com
  * @since 2024-05-23 08:13:27
  */
-public abstract class SingleDetachHandleDispatcher<E extends DetachHandleExecutor> extends GeneralDetachHandleDispatcher {
+public abstract class AbstractSingleDetachHandleDispatcher<E extends DetachHandleExecutor> extends AbstractGeneralDetachHandleDispatcher {
 
     protected E executor;
 
