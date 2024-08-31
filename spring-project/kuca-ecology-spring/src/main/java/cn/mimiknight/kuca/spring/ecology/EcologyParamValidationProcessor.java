@@ -162,11 +162,50 @@ public class EcologyParamValidationProcessor implements BeanFactoryPostProcessor
     }
 
     /**
+     * enable request validation
+     *
+     * @return boolean
+     */
+    private boolean enableRequestValidation() {
+        EcologyManager manager = EcologyManagerFactory.getDetachManager();
+        EcologyConfig config = manager.getConfig();
+        if (Objects.isNull(config)) {
+            return false;
+        }
+        EcologyConfig.RequestValidation validation = config.getRequestValidation();
+        if (Objects.isNull(validation)) {
+            return false;
+        }
+        return validation.isEnable();
+    }
+
+    /**
+     * enable response validation
+     *
+     * @return boolean
+     */
+    private boolean enableResponseValidation() {
+        EcologyManager manager = EcologyManagerFactory.getDetachManager();
+        EcologyConfig config = manager.getConfig();
+        if (Objects.isNull(config)) {
+            return false;
+        }
+        EcologyConfig.ResponseValidation validation = config.getResponseValidation();
+        if (Objects.isNull(validation)) {
+            return false;
+        }
+        return validation.isEnable();
+    }
+
+    /**
      * 校验请求参数
      *
      * @param request 请求
      */
     public <Q> void doRequestValidation(Q request) {
+        if (!enableRequestValidation()) {
+            return;
+        }
         if (Objects.isNull(request) || !(request instanceof EcologyRequest)) {
             return;
         }
@@ -187,6 +226,9 @@ public class EcologyParamValidationProcessor implements BeanFactoryPostProcessor
      * @param response 请求
      */
     public <P> void doResponseValidation(P response) {
+        if (!enableResponseValidation()) {
+            return;
+        }
         if (Objects.isNull(response) || !(response instanceof EcologyResponse)) {
             return;
         }
