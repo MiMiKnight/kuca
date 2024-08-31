@@ -1,4 +1,4 @@
-package cn.mimiknight.kuca.boot.autoconfigure.dispatch.model;
+package cn.mimiknight.kuca.boot.autoconfigure.ecology.model;
 
 /**
  * 参数校验接口

@@ -10,16 +10,21 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>kuca-dispatch-spring</artifactId>
+    <artifactId>kuca-ecology-boot-starter</artifactId>
     <packaging>jar</packaging>
-    <name>kuca-dispatch-spring</name>
-    <description>kuca-dispatch-spring</description>
+    <name>kuca-dispatch-boot-starter</name>
+    <description>kuca-dispatch-boot-starter</description>
 
     <dependencies>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
+            <groupId>cn.mimiknight.kuca</groupId>
+            <artifactId>kuca-spring-boot-autoconfigure</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.mimiknight.kuca</groupId>
+            <artifactId>kuca-ecology-spring</artifactId>
+            <version>${revision}</version>
         </dependency>
     </dependencies>
 

@@ -35,7 +35,7 @@
             </dependency>
             <dependency>
                 <groupId>cn.mimiknight.kuca</groupId>
-                <artifactId>kuca-dispatch-boot-starter</artifactId>
+                <artifactId>kuca-ecology-boot-starter</artifactId>
                 <version>${revision}</version>
             </dependency>
         </dependencies>

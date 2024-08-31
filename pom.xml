@@ -44,12 +44,12 @@
         <module>proto-project/kuca-detach</module>
         <module>proto-project/kuca-errorcode</module>
         <module>proto-project/kuca-proto-dependencies</module>
-        <module>spring-project/kuca-dispatch-spring</module>
+        <module>spring-project/kuca-ecology-spring</module>
         <module>spring-project/kuca-spring-dependencies</module>
         <module>spring-boot-project/kuca-spring-boot-autoconfigure</module>
         <module>spring-boot-project/kuca-errorcode-boot-starter</module>
         <module>spring-boot-project/kuca-appeasy-boot-starter</module>
-        <module>spring-boot-project/kuca-dispatch-boot-starter</module>
+        <module>spring-boot-project/kuca-ecology-boot-starter</module>
         <module>spring-boot-project/kuca-spring-boot-dependencies</module>
         <module>kuca-dependencies</module>
     </modules>

@@ -1,4 +1,4 @@
-package cn.mimiknight.kuca.boot.autoconfigure.dispatch;
+package cn.mimiknight.kuca.boot.autoconfigure.ecology;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

@@ -32,7 +32,7 @@
         </dependency>
         <dependency>
             <groupId>cn.mimiknight.kuca</groupId>
-            <artifactId>kuca-dispatch-spring</artifactId>
+            <artifactId>kuca-ecology-spring</artifactId>
             <version>${revision}</version>
         </dependency>
     </dependencies>
