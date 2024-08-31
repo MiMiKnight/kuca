@@ -1,5 +1,8 @@
 package cn.mimiknight.kuca.spring.ecology.handler;
 
+import cn.mimiknight.kuca.proto.detach.DetachManager;
+import cn.mimiknight.kuca.proto.detach.DetachManagerFactory;
+import cn.mimiknight.kuca.proto.detach.handler.DetachHandler;
 import cn.mimiknight.kuca.spring.ecology.exception.RequestRepeatBindException;
 import cn.mimiknight.kuca.spring.ecology.model.request.EcologyRequest;
 import lombok.Getter;
@@ -73,6 +76,7 @@ public class EcologyRequestHandlerBox implements ApplicationContextAware, Initia
 
     @Override
     public void afterPropertiesSet() throws Exception {
+        DetachManagerFactory.create();
         init();
     }
 
@@ -149,6 +153,7 @@ public class EcologyRequestHandlerBox implements ApplicationContextAware, Initia
         Class<?>[] parameterTypes = method.getParameterTypes();
         Class<EcologyRequest> requestClass = (Class<EcologyRequest>) parameterTypes[0];
         Class<?> responseClass = method.getReturnType();
+        
         // Handler:Request=1:1 and Request:Handler=1:1
         requestHandlerMap.compute(requestClass, (k, v) -> {
             if (null != v) {

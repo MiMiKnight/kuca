@@ -30,4 +30,13 @@ public class DetachManagerFactory {
         return manager;
     }
 
+    /**
+     * get detach manager
+     *
+     * @return {@link DetachManager }
+     */
+    public static DetachManager getDetachManager() {
+        return create();
+    }
+
 }

@@ -9,14 +9,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.util.Assert;
 
-///**
-// * 请求处理调度器抽象类
-// *
-// * @author victor2015yhm@gmail.com
-// * @since 2022-09-05 01:15:27
-// */
-
-
 /**
  * 请求处理控制器抽象类
  *

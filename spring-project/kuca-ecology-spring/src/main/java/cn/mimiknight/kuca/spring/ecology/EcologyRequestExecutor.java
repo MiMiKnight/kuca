@@ -4,17 +4,13 @@ import cn.mimiknight.kuca.spring.ecology.exception.HandlerNotFoundException;
 import cn.mimiknight.kuca.spring.ecology.handler.EcologyRequestHandler;
 import cn.mimiknight.kuca.spring.ecology.handler.EcologyRequestHandlerBox;
 import cn.mimiknight.kuca.spring.ecology.model.request.EcologyRequest;
-import cn.mimiknight.kuca.spring.ecology.model.response.EcologyResponse;
-import cn.mimiknight.kuca.spring.ecology.model.validator.RequestValidator;
-import cn.mimiknight.kuca.spring.ecology.model.validator.ResponseValidator;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections4.MapUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-import java.util.concurrent.ConcurrentMap;
+import java.util.Objects;
 
 /**
  * 请求处理器的执行器类
@@ -54,11 +50,6 @@ public class EcologyRequestExecutor implements ApplicationContextAware, Initiali
     public <Q extends EcologyRequest, P, H extends EcologyRequestHandler<Q, P>> P execute(Q request) {
         // 通过请求参数Class获取handler
         H handler = (H) erhBox.getRequestHandlerMap().get(request.getClass());
-        if (null == handler) {
-            String requestName = request.getClass().getSimpleName();
-            log.error("The handler is undefined or not managed by spring,request class name = {}", requestName);
-            throw new HandlerNotFoundException("The handler is undefined or not managed by spring.");
-        }
         return execute(request, handler);
     }
 
@@ -73,6 +64,11 @@ public class EcologyRequestExecutor implements ApplicationContextAware, Initiali
      * @return {@link P} 响应
      */
     public <Q extends EcologyRequest, P, H extends EcologyRequestHandler<Q, P>> P execute(Q request, H handler) {
+        if (Objects.isNull(handler)) {
+            String requestName = request.getClass().getSimpleName();
+            log.error("The handler is undefined or not managed by spring,request class name = {}", requestName);
+            throw new HandlerNotFoundException("The handler is undefined or not managed by spring.");
+        }
         // 执行请求参数校验
         validationProcessor.doRequestValidation(request);
         // 执行业务逻辑
