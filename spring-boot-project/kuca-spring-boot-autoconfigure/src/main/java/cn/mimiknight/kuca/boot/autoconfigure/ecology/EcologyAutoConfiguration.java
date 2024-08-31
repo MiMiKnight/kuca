@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Bean;
 public class EcologyAutoConfiguration {
 
     @Bean("ecologyManager")
-    @ConditionalOnMissingBean
+    @ConditionalOnMissingBean(value = {EcologyManager.class})
     public EcologyManager getEcologyManager(EcologyProperties properties) {
         EcologyManager manager = EcologyManagerFactory.create();
         EcologyConfig config = manager.getConfig();
