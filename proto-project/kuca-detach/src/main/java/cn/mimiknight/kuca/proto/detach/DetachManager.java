@@ -13,13 +13,15 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author MiMiKnight victor2015yhm@gmail.com
  * @since 2024-05-22 20:24:15
  */
-@Getter
 public class DetachManager {
 
+    @Getter
     private static final int INIT_CAPACITY = 128;
 
+    @Getter
     private final ConcurrentHashMap<Class<? extends DetachHandler>, DetachHandler> handlerMappings;
 
+    @Getter
     private final ConcurrentHashMap<Class<? extends DetachHandleExecutor>, DetachHandleExecutor> executorMappings;
 
     public DetachManager() {
@@ -36,10 +38,7 @@ public class DetachManager {
      */
     public synchronized DetachManager putHandlerMapping(Class<? extends DetachHandler> handlerDataType,
                                                         DetachHandler handler) {
-        DetachManager manager = DetachManagerFactory.getManager();
-        if (Objects.isNull(manager)) {
-            manager = DetachManagerFactory.create();
-        }
+        DetachManager manager = DetachManagerFactory.getDetachManager();
         manager.getHandlerMappings().put(handlerDataType, handler);
         return manager;
     }
@@ -53,10 +52,7 @@ public class DetachManager {
      */
     public synchronized DetachManager putExecutorMapping(Class<? extends DetachHandleExecutor> executorDataType,
                                                          DetachHandleExecutor executor) {
-        DetachManager manager = DetachManagerFactory.getManager();
-        if (Objects.isNull(manager)) {
-            manager = DetachManagerFactory.create();
-        }
+        DetachManager manager = DetachManagerFactory.getDetachManager();
         manager.getExecutorMappings().put(executorDataType, executor);
         return manager;
     }

@@ -153,7 +153,7 @@ public class EcologyRequestHandlerBox implements ApplicationContextAware, Initia
         Class<?>[] parameterTypes = method.getParameterTypes();
         Class<EcologyRequest> requestClass = (Class<EcologyRequest>) parameterTypes[0];
         Class<?> responseClass = method.getReturnType();
-        
+
         // Handler:Request=1:1 and Request:Handler=1:1
         requestHandlerMap.compute(requestClass, (k, v) -> {
             if (null != v) {

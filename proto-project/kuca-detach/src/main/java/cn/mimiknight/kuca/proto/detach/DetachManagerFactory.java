@@ -1,7 +1,5 @@
 package cn.mimiknight.kuca.proto.detach;
 
-import lombok.Getter;
-
 import java.util.Objects;
 
 /**
@@ -12,7 +10,6 @@ import java.util.Objects;
  */
 public class DetachManagerFactory {
 
-    @Getter
     private static DetachManager manager;
 
     private DetachManagerFactory() {

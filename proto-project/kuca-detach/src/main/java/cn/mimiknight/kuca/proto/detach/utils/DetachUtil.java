@@ -67,7 +67,7 @@ public final class DetachUtil {
      * check detach manager
      */
     public static void checkDetachManager() {
-        if (Objects.isNull(DetachManagerFactory.getManager())) {
+        if (Objects.isNull(DetachManagerFactory.getDetachManager())) {
             throw new DetachException("DetachManager object is not exist,please create it first.");
         }
     }
@@ -80,7 +80,7 @@ public final class DetachUtil {
      */
     public static <H extends DetachHandler> H getHandler(Class<H> handlerDataType) {
         checkDetachManager();
-        DetachManager manager = DetachManagerFactory.getManager();
+        DetachManager manager = DetachManagerFactory.getDetachManager();
         DetachHandler handler = manager.getHandlerMappings().get(handlerDataType);
         checkHandler(handler, handlerDataType);
         return handlerDataType.cast(handler);
@@ -94,7 +94,7 @@ public final class DetachUtil {
      */
     public static <E extends DetachHandleExecutor> E getExecutor(Class<E> executorDataType) {
         checkDetachManager();
-        DetachManager manager = DetachManagerFactory.getManager();
+        DetachManager manager = DetachManagerFactory.getDetachManager();
         DetachHandleExecutor executor = manager.getExecutorMappings().get(executorDataType);
         checkExecutor(executor, executorDataType);
         return executorDataType.cast(executor);
