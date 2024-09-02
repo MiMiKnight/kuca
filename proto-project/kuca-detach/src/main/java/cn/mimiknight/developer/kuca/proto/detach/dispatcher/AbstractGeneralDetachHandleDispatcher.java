@@ -1,7 +1,7 @@
-package cn.mimiknight.kuca.proto.detach.dispatcher;
+package cn.mimiknight.developer.kuca.proto.detach.dispatcher;
 
-import cn.mimiknight.kuca.proto.detach.executor.DetachHandleExecutor;
-import cn.mimiknight.kuca.proto.detach.utils.DetachUtil;
+import cn.mimiknight.developer.kuca.proto.detach.executor.DetachHandleExecutor;
+import cn.mimiknight.developer.kuca.proto.detach.utils.DetachUtil;
 
 /**
  * general detach handle dispatcher

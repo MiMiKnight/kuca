@@ -1,4 +1,4 @@
-package cn.mimiknight.kuca.proto.detach.handler;
+package cn.mimiknight.developer.kuca.proto.detach.handler;
 
 /**
  * without param without return detach handler

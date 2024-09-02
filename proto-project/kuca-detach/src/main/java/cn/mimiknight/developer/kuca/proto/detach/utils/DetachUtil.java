@@ -1,10 +1,10 @@
-package cn.mimiknight.kuca.proto.detach.utils;
+package cn.mimiknight.developer.kuca.proto.detach.utils;
 
-import cn.mimiknight.kuca.proto.detach.DetachManager;
-import cn.mimiknight.kuca.proto.detach.DetachManagerFactory;
-import cn.mimiknight.kuca.proto.detach.exception.DetachException;
-import cn.mimiknight.kuca.proto.detach.executor.DetachHandleExecutor;
-import cn.mimiknight.kuca.proto.detach.handler.DetachHandler;
+import cn.mimiknight.developer.kuca.proto.detach.DetachManager;
+import cn.mimiknight.developer.kuca.proto.detach.DetachManagerFactory;
+import cn.mimiknight.developer.kuca.proto.detach.exception.DetachException;
+import cn.mimiknight.developer.kuca.proto.detach.executor.DetachHandleExecutor;
+import cn.mimiknight.developer.kuca.proto.detach.handler.DetachHandler;
 
 import java.util.Objects;
 

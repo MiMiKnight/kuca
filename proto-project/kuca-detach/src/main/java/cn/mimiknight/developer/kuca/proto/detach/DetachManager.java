@@ -1,7 +1,7 @@
-package cn.mimiknight.kuca.proto.detach;
+package cn.mimiknight.developer.kuca.proto.detach;
 
-import cn.mimiknight.kuca.proto.detach.executor.DetachHandleExecutor;
-import cn.mimiknight.kuca.proto.detach.handler.DetachHandler;
+import cn.mimiknight.developer.kuca.proto.detach.executor.DetachHandleExecutor;
+import cn.mimiknight.developer.kuca.proto.detach.handler.DetachHandler;
 import lombok.Getter;
 
 import java.util.concurrent.ConcurrentHashMap;

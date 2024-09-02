@@ -1,4 +1,4 @@
-package cn.mimiknight.kuca.proto.detach.executor;
+package cn.mimiknight.developer.kuca.proto.detach.executor;
 
 /**
  * detach handle executor interface

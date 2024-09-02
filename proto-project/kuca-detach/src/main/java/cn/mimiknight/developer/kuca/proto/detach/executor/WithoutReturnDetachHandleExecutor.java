@@ -1,8 +1,8 @@
-package cn.mimiknight.kuca.proto.detach.executor;
+package cn.mimiknight.developer.kuca.proto.detach.executor;
 
-import cn.mimiknight.kuca.proto.detach.handler.WithParamWithoutReturnDetachHandler;
-import cn.mimiknight.kuca.proto.detach.handler.WithoutParamWithoutReturnDetachHandler;
-import cn.mimiknight.kuca.proto.detach.utils.DetachUtil;
+import cn.mimiknight.developer.kuca.proto.detach.handler.WithParamWithoutReturnDetachHandler;
+import cn.mimiknight.developer.kuca.proto.detach.handler.WithoutParamWithoutReturnDetachHandler;
+import cn.mimiknight.developer.kuca.proto.detach.utils.DetachUtil;
 import lombok.NonNull;
 
 /**

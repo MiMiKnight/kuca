@@ -1,4 +1,4 @@
-package cn.mimiknight.kuca.proto.detach;
+package cn.mimiknight.developer.kuca.proto.detach;
 
 import java.util.Objects;
 

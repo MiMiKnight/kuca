@@ -1,4 +1,4 @@
-package cn.mimiknight.kuca.proto.detach.exception;
+package cn.mimiknight.developer.kuca.proto.detach.exception;
 
 /**
  * detach exception
