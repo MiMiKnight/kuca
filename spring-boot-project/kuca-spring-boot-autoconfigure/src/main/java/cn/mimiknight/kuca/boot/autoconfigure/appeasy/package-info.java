@@ -1,1 +1,0 @@
-package cn.mimiknight.kuca.boot.autoconfigure.appeasy;

@@ -1,4 +1,4 @@
-package cn.mimiknight.kuca.boot.autoconfigure.ecology;
+package cn.mimiknight.developer.kuca.boot.autoconfigure.ecology;
 
 import lombok.Getter;
 import lombok.Setter;
