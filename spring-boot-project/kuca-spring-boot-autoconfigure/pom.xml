@@ -65,6 +65,26 @@
                 </includes>
             </resource>
         </resources>
+
+        <plugins>
+            <!--maven-jar-plugin-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <includes>
+                        <include>**/*.class</include>
+                        <include>META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports
+                        </include>
+                        <include>META-INF/spring-configuration-metadata.json</include>
+                        <include>META-INF/spring.factories</include>
+                    </includes>
+                    <!--项目jar包输出位置-->
+                    <outputDirectory>${project.build.directory}</outputDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+        
     </build>
 
 </project>
