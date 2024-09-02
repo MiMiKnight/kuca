@@ -1,0 +1,1 @@
+package cn.mimiknight.developer.kuca.boot.appeasy;
