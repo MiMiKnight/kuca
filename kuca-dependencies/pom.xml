@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>cn.mimiknight.kuca</groupId>
+        <groupId>cn.mimiknight.developer.kuca</groupId>
         <artifactId>kuca-parent</artifactId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
