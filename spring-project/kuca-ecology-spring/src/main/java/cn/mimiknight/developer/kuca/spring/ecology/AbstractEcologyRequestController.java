@@ -1,7 +1,7 @@
-package cn.mimiknight.kuca.spring.ecology;
+package cn.mimiknight.developer.kuca.spring.ecology;
 
-import cn.mimiknight.kuca.spring.ecology.handler.EcologyRequestHandlerBox;
-import cn.mimiknight.kuca.spring.ecology.model.request.EcologyRequest;
+import cn.mimiknight.developer.kuca.spring.ecology.handler.EcologyRequestHandlerBox;
+import cn.mimiknight.developer.kuca.spring.ecology.model.request.EcologyRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;

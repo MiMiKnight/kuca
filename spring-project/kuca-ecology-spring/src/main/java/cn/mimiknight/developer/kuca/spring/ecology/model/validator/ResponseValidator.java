@@ -1,4 +1,4 @@
-package cn.mimiknight.kuca.spring.ecology.model.validator;
+package cn.mimiknight.developer.kuca.spring.ecology.model.validator;
 
 /**
  * response validator

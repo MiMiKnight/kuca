@@ -1,9 +1,9 @@
-package cn.mimiknight.kuca.spring.ecology;
+package cn.mimiknight.developer.kuca.spring.ecology;
 
-import cn.mimiknight.kuca.spring.ecology.model.request.EcologyRequest;
-import cn.mimiknight.kuca.spring.ecology.model.response.EcologyResponse;
-import cn.mimiknight.kuca.spring.ecology.model.validator.RequestValidator;
-import cn.mimiknight.kuca.spring.ecology.model.validator.ResponseValidator;
+import cn.mimiknight.developer.kuca.spring.ecology.model.response.EcologyResponse;
+import cn.mimiknight.developer.kuca.spring.ecology.model.request.EcologyRequest;
+import cn.mimiknight.developer.kuca.spring.ecology.model.validator.RequestValidator;
+import cn.mimiknight.developer.kuca.spring.ecology.model.validator.ResponseValidator;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;

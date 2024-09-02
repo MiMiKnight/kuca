@@ -1,4 +1,4 @@
-package cn.mimiknight.kuca.spring.ecology.model.request;
+package cn.mimiknight.developer.kuca.spring.ecology.model.request;
 
 /**
  * 请求参数接口

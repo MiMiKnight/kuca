@@ -1,4 +1,4 @@
-package cn.mimiknight.kuca.spring.ecology;
+package cn.mimiknight.developer.kuca.spring.ecology;
 
 import java.util.Objects;
 

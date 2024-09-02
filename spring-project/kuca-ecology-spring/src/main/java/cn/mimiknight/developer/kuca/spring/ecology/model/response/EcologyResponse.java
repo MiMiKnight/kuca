@@ -1,4 +1,4 @@
-package cn.mimiknight.kuca.spring.ecology.model.response;
+package cn.mimiknight.developer.kuca.spring.ecology.model.response;
 
 /**
  * 响应参数接口

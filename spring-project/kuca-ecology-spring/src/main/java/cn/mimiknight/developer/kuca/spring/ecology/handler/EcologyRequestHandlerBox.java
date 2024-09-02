@@ -1,10 +1,8 @@
-package cn.mimiknight.kuca.spring.ecology.handler;
+package cn.mimiknight.developer.kuca.spring.ecology.handler;
 
-import cn.mimiknight.kuca.proto.detach.DetachManager;
 import cn.mimiknight.kuca.proto.detach.DetachManagerFactory;
-import cn.mimiknight.kuca.proto.detach.handler.DetachHandler;
-import cn.mimiknight.kuca.spring.ecology.exception.RequestRepeatBindException;
-import cn.mimiknight.kuca.spring.ecology.model.request.EcologyRequest;
+import cn.mimiknight.developer.kuca.spring.ecology.exception.RequestRepeatBindException;
+import cn.mimiknight.developer.kuca.spring.ecology.model.request.EcologyRequest;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;

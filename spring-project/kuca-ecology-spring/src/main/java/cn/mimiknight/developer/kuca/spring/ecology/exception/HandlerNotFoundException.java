@@ -1,4 +1,4 @@
-package cn.mimiknight.kuca.spring.ecology.exception;
+package cn.mimiknight.developer.kuca.spring.ecology.exception;
 
 /**
  * Handler未找到异常
