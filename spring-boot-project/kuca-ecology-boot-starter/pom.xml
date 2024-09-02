@@ -12,8 +12,8 @@
 
     <artifactId>kuca-ecology-boot-starter</artifactId>
     <packaging>jar</packaging>
-    <name>kuca-dispatch-boot-starter</name>
-    <description>kuca-dispatch-boot-starter</description>
+    <name>kuca-ecology-boot-starter</name>
+    <description>kuca-ecology-boot-starter</description>
 
     <dependencies>
         <dependency>
