@@ -1,4 +1,4 @@
-package cn.mimiknight.kuca.proto.errorcode;
+package cn.mimiknight.developer.kuca.proto.errorcode;
 
 /**
  * error code

@@ -1,4 +1,4 @@
-package cn.mimiknight.kuca.proto.errorcode.model;
+package cn.mimiknight.developer.kuca.proto.errorcode.model;
 
 import lombok.Getter;
 import lombok.experimental.Accessors;
@@ -12,18 +12,18 @@ import lombok.experimental.Accessors;
  */
 @Getter
 @Accessors(chain = true)
-public class ErrorCode {
+public class ErrorReturn {
 
 
     /**
-     * id
+     * code
      */
-    private String id;
+    private String code;
 
     /**
-     * type id
+     * error type
      */
-    private String typeId;
+    private ErrorType errorType;
 
     /**
      * desc

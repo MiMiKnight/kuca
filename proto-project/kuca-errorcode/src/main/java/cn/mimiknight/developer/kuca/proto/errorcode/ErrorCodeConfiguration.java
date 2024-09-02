@@ -1,8 +1,8 @@
-package cn.mimiknight.kuca.proto.errorcode;
+package cn.mimiknight.developer.kuca.proto.errorcode;
 
-import cn.mimiknight.kuca.proto.errorcode.model.ErrorCode;
-import cn.mimiknight.kuca.proto.errorcode.model.ErrorReturn;
-import cn.mimiknight.kuca.proto.errorcode.model.ErrorType;
+import cn.mimiknight.developer.kuca.proto.errorcode.model.ErrorCode;
+import cn.mimiknight.developer.kuca.proto.errorcode.model.ErrorReturn;
+import cn.mimiknight.developer.kuca.proto.errorcode.model.ErrorType;
 import lombok.Getter;
 import lombok.Setter;
 
