@@ -1,4 +1,4 @@
-kuca deploy
+jar deploy
 ========
 
 ---
@@ -14,7 +14,7 @@ mvn clean compile install
 ```
 - **部署至远程仓库**
 ```shell
-mvn clean compile install deploy
+mvn clean compile deploy
 ```
 - **撤回版本修改**
 ```shell
