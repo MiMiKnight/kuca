@@ -46,7 +46,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>cn.mimiknight.kuca</groupId>
+            <groupId>cn.mimiknight.developer.kuca</groupId>
             <artifactId>kuca-ecology-spring</artifactId>
             <version>${revision}</version>
             <optional>true</optional>

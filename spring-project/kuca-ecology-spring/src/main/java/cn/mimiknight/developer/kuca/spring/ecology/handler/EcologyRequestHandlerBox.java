@@ -1,6 +1,6 @@
 package cn.mimiknight.developer.kuca.spring.ecology.handler;
 
-import cn.mimiknight.kuca.proto.detach.DetachManagerFactory;
+import cn.mimiknight.developer.kuca.proto.detach.DetachManagerFactory;
 import cn.mimiknight.developer.kuca.spring.ecology.exception.RequestRepeatBindException;
 import cn.mimiknight.developer.kuca.spring.ecology.model.request.EcologyRequest;
 import lombok.Getter;

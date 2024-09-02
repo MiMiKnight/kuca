@@ -1,6 +1,6 @@
 package cn.mimiknight.developer.kuca.spring.ecology.handler;
 
-import cn.mimiknight.kuca.proto.detach.handler.WithParamWithReturnDetachHandler;
+import cn.mimiknight.developer.kuca.proto.detach.handler.WithParamWithReturnDetachHandler;
 import cn.mimiknight.developer.kuca.spring.ecology.model.request.EcologyRequest;
 
 /**

@@ -18,7 +18,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.mimiknight.kuca</groupId>
+            <groupId>cn.mimiknight.developer.kuca</groupId>
             <artifactId>kuca-spring-boot-autoconfigure</artifactId>
             <version>${revision}</version>
         </dependency>

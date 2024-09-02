@@ -1,6 +1,6 @@
 package cn.mimiknight.developer.kuca.boot.autoconfigure.ecology;
 
-import cn.mimiknight.kuca.spring.ecology.EcologyConfig;
+import cn.mimiknight.developer.kuca.spring.ecology.EcologyConfig;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

@@ -17,12 +17,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.mimiknight.kuca</groupId>
+            <groupId>cn.mimiknight.developer.kuca</groupId>
             <artifactId>kuca-spring-boot-autoconfigure</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>
-            <groupId>cn.mimiknight.kuca</groupId>
+            <groupId>cn.mimiknight.developer.kuca</groupId>
             <artifactId>kuca-ecology-spring</artifactId>
             <version>${revision}</version>
         </dependency>

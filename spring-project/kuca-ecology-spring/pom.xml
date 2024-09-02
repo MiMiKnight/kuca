@@ -27,7 +27,7 @@
             <artifactId>spring-boot-starter-logging</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.mimiknight.kuca</groupId>
+            <groupId>cn.mimiknight.developer.kuca</groupId>
             <artifactId>kuca-detach</artifactId>
             <version>${revision}</version>
             <scope>compile</scope>

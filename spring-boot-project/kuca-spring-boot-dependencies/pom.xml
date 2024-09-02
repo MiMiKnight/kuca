@@ -19,22 +19,22 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>cn.mimiknight.kuca</groupId>
+                <groupId>cn.mimiknight.developer.kuca</groupId>
                 <artifactId>kuca-spring-boot-autoconfigure</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>cn.mimiknight.kuca</groupId>
+                <groupId>cn.mimiknight.developer.kuca</groupId>
                 <artifactId>kuca-errorcode-boot-starter</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>cn.mimiknight.kuca</groupId>
+                <groupId>cn.mimiknight.developer.kuca</groupId>
                 <artifactId>kuca-appeasy-boot-starter</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>cn.mimiknight.kuca</groupId>
+                <groupId>cn.mimiknight.developer.kuca</groupId>
                 <artifactId>kuca-ecology-boot-starter</artifactId>
                 <version>${revision}</version>
             </dependency>

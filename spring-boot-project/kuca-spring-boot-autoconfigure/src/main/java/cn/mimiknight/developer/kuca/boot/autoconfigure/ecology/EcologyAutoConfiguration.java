@@ -1,8 +1,8 @@
 package cn.mimiknight.developer.kuca.boot.autoconfigure.ecology;
 
-import cn.mimiknight.kuca.spring.ecology.EcologyConfig;
-import cn.mimiknight.kuca.spring.ecology.EcologyManager;
-import cn.mimiknight.kuca.spring.ecology.EcologyManagerFactory;
+import cn.mimiknight.developer.kuca.spring.ecology.EcologyConfig;
+import cn.mimiknight.developer.kuca.spring.ecology.EcologyManager;
+import cn.mimiknight.developer.kuca.spring.ecology.EcologyManagerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

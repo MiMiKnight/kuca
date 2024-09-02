@@ -19,21 +19,21 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>cn.mimiknight.kuca</groupId>
+                <groupId>cn.mimiknight.developer.kuca</groupId>
                 <artifactId>kuca-spring-boot-dependencies</artifactId>
                 <version>${revision}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>cn.mimiknight.kuca</groupId>
+                <groupId>cn.mimiknight.developer.kuca</groupId>
                 <artifactId>kuca-spring-dependencies</artifactId>
                 <version>${revision}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>cn.mimiknight.kuca</groupId>
+                <groupId>cn.mimiknight.developer.kuca</groupId>
                 <artifactId>kuca-proto-dependencies</artifactId>
                 <version>${revision}</version>
                 <type>pom</type>
