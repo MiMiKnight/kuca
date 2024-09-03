@@ -38,4 +38,19 @@
         <module>kuca-dependencies</module>
     </modules>
 
+    <build>
+        <plugins>
+            <!--versions-maven-plugin-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>${versions-maven-plugin.version}</version>
+                <configuration>
+                    <generateBackupPoms>true</generateBackupPoms>
+                    <newVersion>${revision}</newVersion>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

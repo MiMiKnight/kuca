@@ -4,6 +4,7 @@ jar deploy
 ---
 
 ### **依赖发布** 
+- 配合versions-maven-plugin插件使用
 - **设置版本**
 ```shell
 mvn versions:set "-DnewVersion=1.0.0-SNAPSHOT"
