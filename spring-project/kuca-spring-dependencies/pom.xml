@@ -23,6 +23,11 @@
                 <artifactId>kuca-ecology-spring</artifactId>
                 <version>${revision}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.mimiknight.developer.kuca</groupId>
+                <artifactId>kuca-appeasy-spring</artifactId>
+                <version>${revision}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
