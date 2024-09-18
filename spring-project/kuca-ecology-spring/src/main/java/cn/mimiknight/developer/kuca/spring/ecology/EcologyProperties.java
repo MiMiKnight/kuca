@@ -12,7 +12,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class EcologyConfig {
+public class EcologyProperties {
 
     private RequestValidation requestValidation = new RequestValidation();
     private ResponseValidation responseValidation = new ResponseValidation();

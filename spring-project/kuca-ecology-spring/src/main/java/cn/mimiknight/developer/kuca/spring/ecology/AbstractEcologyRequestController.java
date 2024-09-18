@@ -42,7 +42,7 @@ public abstract class AbstractEcologyRequestController implements ApplicationCon
      * @param responseDataType 响应参数数据类型
      * @return response 响应参数
      */
-    public <Q extends EcologyRequest, P> P handle(Q request, Class<P> responseDataType) {
+    protected <Q extends EcologyRequest, P> P handle(Q request, Class<P> responseDataType) {
         Assert.notNull(request, "The request argument is required; it must not be null");
         // 获取实际响应类型
         Class<?> actualResponseDataType = box.getRequestResponseMap().get(request.getClass());

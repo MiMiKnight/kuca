@@ -1,7 +1,7 @@
 package cn.mimiknight.developer.kuca.spring.ecology;
 
-import cn.mimiknight.developer.kuca.spring.ecology.model.response.EcologyResponse;
 import cn.mimiknight.developer.kuca.spring.ecology.model.request.EcologyRequest;
+import cn.mimiknight.developer.kuca.spring.ecology.model.response.EcologyResponse;
 import cn.mimiknight.developer.kuca.spring.ecology.model.validator.RequestValidator;
 import cn.mimiknight.developer.kuca.spring.ecology.model.validator.ResponseValidator;
 import lombok.Getter;
@@ -33,18 +33,6 @@ import java.util.concurrent.ConcurrentMap;
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class EcologyParamValidationProcessor implements BeanFactoryPostProcessor {
 
-    /**
-     * Request与Request Validation映射Map
-     */
-    @Getter
-    private final ConcurrentMap<Class<EcologyRequest>, RequestValidator<?>> requestRequestValidationMap;
-
-    /**
-     * Request与Response Validation映射Map
-     */
-    @Getter
-    private final ConcurrentMap<Class<EcologyRequest>, ResponseValidator<?>> requestResponseValidationMap;
-
     private interface Constant {
 
         /**
@@ -64,6 +52,20 @@ public class EcologyParamValidationProcessor implements BeanFactoryPostProcessor
 
     }
 
+    /**
+     * Request与Request Validation映射Map
+     */
+    @Getter
+    private final ConcurrentMap<Class<EcologyRequest>, RequestValidator<?>> requestRequestValidationMap;
+
+    /**
+     * Request与Response Validation映射Map
+     */
+    @Getter
+    private final ConcurrentMap<Class<EcologyRequest>, ResponseValidator<?>> requestResponseValidationMap;
+
+    private EcologyProperties properties;
+
     public EcologyParamValidationProcessor() {
         requestRequestValidationMap = new ConcurrentHashMap<>(Constant.INIT_CAPACITY);
         requestResponseValidationMap = new ConcurrentHashMap<>(Constant.INIT_CAPACITY);
@@ -75,6 +77,8 @@ public class EcologyParamValidationProcessor implements BeanFactoryPostProcessor
         Map<String, RequestValidator> requestValidations = beanFactory.getBeansOfType(RequestValidator.class);
         // 获取响应参数校验对象
         Map<String, ResponseValidator> responseValidations = beanFactory.getBeansOfType(ResponseValidator.class);
+        // 属性
+        properties = beanFactory.getBean(EcologyProperties.class);
 
         buildRequestValidationMap(requestValidations);
         buildResponseValidationMap(responseValidations);
@@ -167,12 +171,10 @@ public class EcologyParamValidationProcessor implements BeanFactoryPostProcessor
      * @return boolean
      */
     private boolean enableRequestValidation() {
-        EcologyManager manager = EcologyManagerFactory.getDetachManager();
-        EcologyConfig config = manager.getConfig();
-        if (Objects.isNull(config)) {
+        if (Objects.isNull(properties)) {
             return false;
         }
-        EcologyConfig.RequestValidation validation = config.getRequestValidation();
+        EcologyProperties.RequestValidation validation = properties.getRequestValidation();
         if (Objects.isNull(validation)) {
             return false;
         }
@@ -185,12 +187,10 @@ public class EcologyParamValidationProcessor implements BeanFactoryPostProcessor
      * @return boolean
      */
     private boolean enableResponseValidation() {
-        EcologyManager manager = EcologyManagerFactory.getDetachManager();
-        EcologyConfig config = manager.getConfig();
-        if (Objects.isNull(config)) {
+        if (Objects.isNull(properties)) {
             return false;
         }
-        EcologyConfig.ResponseValidation validation = config.getResponseValidation();
+        EcologyProperties.ResponseValidation validation = properties.getResponseValidation();
         if (Objects.isNull(validation)) {
             return false;
         }
