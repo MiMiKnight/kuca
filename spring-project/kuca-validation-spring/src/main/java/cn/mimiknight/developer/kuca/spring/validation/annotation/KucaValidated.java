@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Kucao校验注解
+ * Kuca校验注解
  *
  * @author victor2015yhm@gmail.com
  * @since 2023-06-08 01:06:11
