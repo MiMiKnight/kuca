@@ -5,9 +5,11 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.core.Ordered;
+
 @Slf4j
 @Aspect
-public class ValidationAspect {
+public class ValidationAspect implements Ordered {
 
     @Pointcut("@annotation(cn.mimiknight.developer.kuca.spring.validation.annotation.KucaValidated)")
     public void pointcut() {
@@ -16,5 +18,10 @@ public class ValidationAspect {
     @Before(value = "pointcut()")
     public void before(final JoinPoint joinPoint) {
         log.info("ValidationAspect...before()...");
+    }
+
+    @Override
+    public int getOrder() {
+        return Byte.MAX_VALUE;
     }
 }
