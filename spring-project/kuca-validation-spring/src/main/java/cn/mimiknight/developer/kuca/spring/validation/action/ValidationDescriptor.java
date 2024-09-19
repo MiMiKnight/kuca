@@ -26,7 +26,6 @@ public class ValidationDescriptor<T, V, A extends Annotation> {
 
         ConstraintAnnotationDescriptor.Builder<A> builder = new ConstraintAnnotationDescriptor.Builder<>();
         this.annotationDescriptor = builder.setAnnotation(annotation).build();
-
         this.validators = ConstraintHelper.getValidators(annotation);
     }
 

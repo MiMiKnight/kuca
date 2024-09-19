@@ -1,7 +1,6 @@
 package cn.mimiknight.developer.kuca.spring.validation.action;
 
 import cn.mimiknight.developer.kuca.spring.validation.exception.ValidationException;
-import cn.mimiknight.developer.kuca.spring.validation.utils.KucaValidationUtils;
 
 import java.lang.annotation.Annotation;
 
@@ -41,7 +40,7 @@ public final class ConstraintAnnotationDescriptor<A extends Annotation> extends 
 
         @Override
         public Builder<A> setAnnotation(A annotation) {
-            if (!KucaValidationUtils.isConstraintAnnotation(annotation)) {
+            if (!ConstraintHelper.isConstraintAnnotation(annotation)) {
                 throw new ValidationException("The parameter annotation is not constraint annotation type.");
             }
             super.setAnnotation(annotation);
