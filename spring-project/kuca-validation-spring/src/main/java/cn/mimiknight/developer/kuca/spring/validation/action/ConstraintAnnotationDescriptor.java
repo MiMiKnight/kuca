@@ -28,8 +28,8 @@ public final class ConstraintAnnotationDescriptor<A extends Annotation> extends 
         return getMandatoryAttribute(ConstraintHelper.MESSAGE, String.class);
     }
 
-    public Class<?>[] getGroups() {
-        return getMandatoryAttribute(ConstraintHelper.GROUPS, Class[].class);
+    public String[] getGroups() {
+        return getMandatoryAttribute(ConstraintHelper.GROUPS, String[].class);
     }
 
     public int getOrder() {

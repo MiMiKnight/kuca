@@ -2,6 +2,7 @@ package cn.mimiknight.developer.kuca.spring.validation.action;
 
 import cn.mimiknight.developer.kuca.spring.validation.annotation.KucaConstraint;
 import cn.mimiknight.developer.kuca.spring.validation.exception.ValidationException;
+import cn.mimiknight.developer.kuca.spring.validation.utils.KucaValidationUtils;
 import cn.mimiknight.developer.kuca.spring.validation.validator.ConstraintValidator;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ArrayUtils;
@@ -45,7 +46,7 @@ public class ConstraintHelper {
         Assert.notNull(annotation, "Parameter must not be null.");
         Class<? extends Annotation> type = annotation.annotationType();
         // 目标注解没有被指定注解修饰，则非校验注解
-        if (!type.isAnnotationPresent(KucaConstraint.class)) {
+        if (KucaValidationUtils.isValidated(type)) {
             return false;
         }
         // 如果为校验注解，则Validator不允许为空
