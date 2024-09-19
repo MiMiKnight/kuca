@@ -11,7 +11,8 @@ import org.springframework.core.Ordered;
 @Aspect
 public class ValidationAspect implements Ordered {
 
-    @Pointcut("@annotation(cn.mimiknight.developer.kuca.spring.validation.annotation.KucaValidated)")
+    @Pointcut("@annotation(cn.mimiknight.developer.kuca.spring.validation.annotation.KucaValidated) " +
+            "|| @within(cn.mimiknight.developer.kuca.spring.validation.annotation.KucaValidated)")
     public void pointcut() {
     }
 
