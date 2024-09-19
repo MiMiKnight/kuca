@@ -91,11 +91,55 @@ public final class KucaValidationUtils {
         // 表层校验
         if (CollectionUtils.isNotEmpty(constraintAnnotations)) {
             valid(target, value, constraintAnnotations);
+        }
+        // 嵌套校验
+        valid(value, type);
+    }
+
+    /**
+     * 对象嵌套校验
+     *
+     * @param value value
+     */
+    public static <V> void valid(V value, Class<?> type) {
+        if (Objects.isNull(value) || type.isPrimitive()) {
             return;
         }
-        // 参数为基本数据类型或者值为null则不执行嵌套校验  反之执行嵌套校验
-        if (!Objects.isNull(value) && !type.isPrimitive()) {
-            // TODO 嵌套校验
+        List<Field> fields = ConstraintHelper.getAllFields(value);
+        if (CollectionUtils.isEmpty(fields)) {
+            return;
+        }
+        Object fieldValue;
+        for (Field field : fields) {
+            fieldValue = ConstraintHelper.getFieldValue(value, field);
+            // 获取修饰参数的注解
+            Annotation[] annotations = field.getDeclaredAnnotations();
+            // 获取方法参数上的校验注解
+            List<Annotation> constraintAnnotations = KucaValidationUtils.getConstraintAnnotations(annotations);
+            // 表层校验
+            if (CollectionUtils.isNotEmpty(constraintAnnotations)) {
+                valid(field, fieldValue, constraintAnnotations);
+            }
+            // 嵌套校验
+            if (field.isAnnotationPresent(KucaValidated.class)) {
+                valid(fieldValue, field.getType());
+            }
+        }
+    }
+
+    /**
+     * 字段参数表层校验
+     *
+     * @param target                target
+     * @param value                 value
+     * @param constraintAnnotations constraint annotations
+     */
+    private static <V> void valid(Field target, V value, List<Annotation> constraintAnnotations) {
+        if (CollectionUtils.isEmpty(constraintAnnotations)) {
+            return;
+        }
+        for (Annotation constraint : constraintAnnotations) {
+            ValidationDescriptor.create(target, value, constraint).valid();
         }
     }
 

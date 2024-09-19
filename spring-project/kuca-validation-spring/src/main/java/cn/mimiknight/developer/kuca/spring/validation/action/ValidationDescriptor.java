@@ -52,6 +52,7 @@ public class ValidationDescriptor<T, V, A extends Annotation> {
             return;
         }
         for (ConstraintValidator<A, V> validator : validators) {
+            validator.initialize(annotationDescriptor.getAnnotation());
             if (!validator.isValid(value)) {
                 throw new KucaMethodArgumentNotValidException(this);
             }

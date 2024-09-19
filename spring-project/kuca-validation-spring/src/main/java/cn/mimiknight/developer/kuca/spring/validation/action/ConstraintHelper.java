@@ -99,31 +99,43 @@ public class ConstraintHelper {
      * @param target 目标对象
      * @return {@link List}<{@link Field}>
      */
-    public static List<Field> getFields(Object target) {
+    public static <V> List<Field> getAllFields(V target) {
         Assert.notNull(target, "Parameter must not be null.");
-        Class<?> targetClass = target.getClass();
+        Class<?> type = target.getClass();
 
         LinkedList<Field> fields = new LinkedList<>();
 
-        while (null != targetClass) {
-            Field[] declaredFields = targetClass.getDeclaredFields();
+        while (null != type) {
+            Field[] declaredFields = type.getDeclaredFields();
             List<Field> fieldList = Arrays.stream(declaredFields).collect(Collectors.toList());
             Collections.reverse(fieldList);
             fields.addAll(fieldList);
-            targetClass = targetClass.getSuperclass();
+            type = type.getSuperclass();
         }
-
         return fields;
     }
 
+    /**
+     * 反射获取字段值
+     *
+     * @param target target
+     * @param field  field
+     * @return {@link Object }
+     */
     public static <T> Object getFieldValue(T target, Field field) {
+        boolean isAccessible = false;
         try {
-            if (!field.isAccessible()) {
+            isAccessible = field.isAccessible();
+            if (!isAccessible) {
                 field.setAccessible(true);
             }
             return field.get(target);
         } catch (SecurityException | IllegalAccessException e) {
             throw new ValidationException("Get field value failed.", e);
+        } finally {
+            if (!isAccessible) {
+                field.setAccessible(false);
+            }
         }
     }
 
