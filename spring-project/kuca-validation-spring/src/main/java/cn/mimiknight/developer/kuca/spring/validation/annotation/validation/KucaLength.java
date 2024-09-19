@@ -60,6 +60,13 @@ public @interface KucaLength {
      */
     Class<?>[] groups() default {};
 
+    /**
+     * 注解校验的执行顺序
+     *
+     * @return int
+     */
+    int order() default -1;
+
     @Target(value = {ElementType.FIELD, ElementType.LOCAL_VARIABLE})
     @Retention(RetentionPolicy.RUNTIME)
     @Documented

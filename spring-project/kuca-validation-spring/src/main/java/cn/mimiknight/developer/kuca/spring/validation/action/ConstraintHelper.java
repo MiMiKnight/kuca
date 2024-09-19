@@ -32,6 +32,7 @@ public class ConstraintHelper {
     public static final String MESSAGE = "message";
     public static final String ERROR_CODE = "errorCode";
     public static final String GROUPS = "groups";
+    public static final String ORDER = "order";
 
     /**
      * 获取目标对象的全部成员属性字段

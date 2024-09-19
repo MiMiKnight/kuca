@@ -32,6 +32,10 @@ public final class ConstraintAnnotationDescriptor<A extends Annotation> extends 
         return getMandatoryAttribute(ConstraintHelper.GROUPS, Class[].class);
     }
 
+    public int getOrder() {
+        return getMandatoryAttribute(ConstraintHelper.ORDER, Integer.class);
+    }
+
     public static class Builder<S extends Annotation> extends AnnotationDescriptor.Builder<S> {
 
         @Override
