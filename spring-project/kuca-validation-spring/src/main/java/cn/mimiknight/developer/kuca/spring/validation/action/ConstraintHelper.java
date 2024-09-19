@@ -67,8 +67,10 @@ public class ConstraintHelper {
 
         Object errorCode = attributes.get(ERROR_CODE);
         Object message = attributes.get(MESSAGE);
+        Object groups = attributes.get(GROUPS);
+        Object order = attributes.get(ORDER);
         // 目标注解指定属性不存在，则非校验注解
-        return null != errorCode && null != message;
+        return null != errorCode && null != message && null != groups && null != order;
     }
 
     /**
