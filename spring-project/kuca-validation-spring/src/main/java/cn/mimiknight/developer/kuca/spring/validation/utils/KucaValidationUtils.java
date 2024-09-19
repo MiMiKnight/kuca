@@ -25,7 +25,7 @@ public final class KucaValidationUtils {
     }
 
     /**
-     * 指定对象是否被{@link KucaValidated}注解修饰
+     * 指定参数是否被{@link KucaValidated}注解修饰
      *
      * @param target target
      * @return boolean
@@ -38,7 +38,7 @@ public final class KucaValidationUtils {
     }
 
     /**
-     * 指定对象是否被{@link KucaValidated}注解修饰
+     * 指定字段是否被{@link KucaValidated}注解修饰
      *
      * @param target target
      * @return boolean
