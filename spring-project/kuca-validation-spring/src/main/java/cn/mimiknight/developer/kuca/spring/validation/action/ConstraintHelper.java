@@ -3,8 +3,6 @@ package cn.mimiknight.developer.kuca.spring.validation.action;
 import cn.mimiknight.developer.kuca.spring.validation.annotation.KucaConstraint;
 import cn.mimiknight.developer.kuca.spring.validation.exception.ValidationException;
 import cn.mimiknight.developer.kuca.spring.validation.validator.ConstraintValidator;
-import org.apache.commons.collections4.MapUtils;
-import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.util.Assert;
 
 import java.lang.annotation.Annotation;
@@ -14,7 +12,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -57,47 +54,6 @@ public class ConstraintHelper {
         }
 
         return fields;
-    }
-
-    public static <A extends Annotation> boolean isConstraintAnnotation(A annotation) {
-        Assert.notNull(annotation, "Parameter must not be null.");
-
-        Class<?> targetClass = annotation.getClass();
-
-        // 目标对象不是注解类型，则非校验注解
-        if (!targetClass.isAnnotation()) {
-            return false;
-        }
-
-        // 目标对象没有被指定注解修饰，则非校验注解
-        if (!targetClass.isAnnotationPresent(KucaConstraint.class)) {
-            return false;
-        }
-
-        // 如果为校验注解，则Validator不允许为空
-        KucaConstraint constraint = targetClass.getDeclaredAnnotation(KucaConstraint.class);
-        Class<? extends ConstraintValidator<?, ?>>[] validatorClazzArrays = constraint.validatedBy();
-        if (ArrayUtils.isEmpty(validatorClazzArrays)) {
-            return false;
-        }
-
-        ConstraintAnnotationDescriptor.Builder<A> builder = new ConstraintAnnotationDescriptor.Builder<>();
-        ConstraintAnnotationDescriptor<A> descriptor = builder.setAnnotation(annotation).build();
-
-        // 目标对象属性为空，则非校验注解
-        Map<String, Object> attributes = descriptor.getAttributes();
-        if (MapUtils.isEmpty(attributes)) {
-            return false;
-        }
-
-        Object errorCode = attributes.get(ERROR_CODE);
-        Object message = attributes.get(MESSAGE);
-        // 目标对象指定属性不存在，则非校验注解
-        if (null == errorCode || null == message) {
-            return false;
-        }
-
-        return true;
     }
 
 

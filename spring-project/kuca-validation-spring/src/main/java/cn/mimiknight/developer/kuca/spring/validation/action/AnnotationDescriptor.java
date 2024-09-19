@@ -91,16 +91,16 @@ public class AnnotationDescriptor<A extends Annotation> implements Serializable 
         return System.getSecurityManager() != null ? AccessController.doPrivileged(action) : action.run();
     }
 
-    public static class Builder<S extends Annotation> {
-        private S annotation;
+    public static class Builder<A extends Annotation> {
+        private A annotation;
 
-        public Builder<S> setAnnotation(S annotation) {
+        public Builder<A> setAnnotation(A annotation) {
             Assert.notNull(annotation, "Parameter annotation should not be null.");
             this.annotation = annotation;
             return this;
         }
 
-        public AnnotationDescriptor<S> build() {
+        public AnnotationDescriptor<A> build() {
             return new AnnotationDescriptor<>(annotation);
         }
 
