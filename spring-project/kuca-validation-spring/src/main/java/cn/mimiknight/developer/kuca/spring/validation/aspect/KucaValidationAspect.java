@@ -1,9 +1,8 @@
 package cn.mimiknight.developer.kuca.spring.validation.aspect;
 
-import cn.mimiknight.developer.kuca.spring.validation.action.AnnotationDescriptor;
-import cn.mimiknight.developer.kuca.spring.validation.action.ConstraintAnnotationDescriptor;
 import cn.mimiknight.developer.kuca.spring.validation.utils.KucaValidationUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -45,8 +44,12 @@ public class KucaValidationAspect implements Ordered {
             }
             // 获取修饰参数的注解
             Annotation[] annotations = parameter.getDeclaredAnnotations();
+            // 获取方法参数上的校验注解
             List<Annotation> constraintAnnotations = KucaValidationUtils.getConstraintAnnotations(annotations);
-//            new AnnotationDescriptor.Builder<>().setAnnotation(null).build()
+            if (CollectionUtils.isEmpty(constraintAnnotations)) {
+                continue;
+            }
+            KucaValidationUtils.valid(parameter, constraintAnnotations);
         }
         log.info("ValidationAspect...before()...");
     }

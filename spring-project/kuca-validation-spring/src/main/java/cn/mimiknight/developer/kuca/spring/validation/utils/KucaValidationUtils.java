@@ -1,19 +1,15 @@
 package cn.mimiknight.developer.kuca.spring.validation.utils;
 
 import cn.mimiknight.developer.kuca.spring.validation.action.ConstraintHelper;
-import cn.mimiknight.developer.kuca.spring.validation.annotation.KucaConstraint;
 import cn.mimiknight.developer.kuca.spring.validation.annotation.KucaValidated;
-import cn.mimiknight.developer.kuca.spring.validation.exception.ValidationException;
-import cn.mimiknight.developer.kuca.spring.validation.validator.ConstraintValidator;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Parameter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public final class KucaValidationUtils {
 
@@ -67,5 +63,20 @@ public final class KucaValidationUtils {
         return list;
     }
 
+    /**
+     * 校验指定参数
+     *
+     * @param target                target
+     * @param constraintAnnotations constraint annotations
+     */
+    public static void valid(Object target, List<Annotation> constraintAnnotations) {
+
+        if (target instanceof Parameter) {
+            Parameter parameter = Parameter.class.cast(target);
+        }
+        if (target instanceof Field) {
+            Field field = Field.class.cast(target);
+        }
+    }
 
 }
