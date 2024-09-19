@@ -40,9 +40,9 @@ public @interface KucaNull {
     /**
      * 分组
      *
-     * @return {@link Class}<{@link ?}>{@link []}
+     * @return {@link String[] }
      */
-    Class<?>[] groups() default {};
+    String[] groups() default {};
 
     /**
      * 注解校验的执行顺序
