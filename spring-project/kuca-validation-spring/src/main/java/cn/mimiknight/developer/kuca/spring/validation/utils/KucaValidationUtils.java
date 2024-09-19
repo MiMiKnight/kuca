@@ -107,9 +107,7 @@ public final class KucaValidationUtils {
             valid(target, value, constraintAnnotations);
         }
         // 嵌套校验
-        if (isValidated(type)) {
-            valid(value, type);
-        }
+        valid(value, type);
     }
 
     /**
@@ -118,7 +116,7 @@ public final class KucaValidationUtils {
      * @param value value
      */
     public static <V> void valid(V value, Class<?> type) {
-        if (Objects.isNull(value) || type.isPrimitive()) {
+        if (Objects.isNull(value) || type.isPrimitive() || !isValidated(type)) {
             return;
         }
         List<Field> fields = ConstraintHelper.getAllFields(value);
@@ -137,9 +135,8 @@ public final class KucaValidationUtils {
                 valid(field, fieldValue, constraintAnnotations);
             }
             // 嵌套校验
-            Class<?> fieldType = field.getType();
-            if (isValidated(field) && isValidated(fieldType)) {
-                valid(fieldValue, fieldType);
+            if (isValidated(field)) {
+                valid(fieldValue, field.getType());
             }
         }
     }

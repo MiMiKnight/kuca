@@ -3,9 +3,9 @@ package cn.mimiknight.developer.kuca.spring.validation.aspect;
 import cn.mimiknight.developer.kuca.spring.validation.utils.KucaValidationUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
-import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.Ordered;
@@ -22,13 +22,30 @@ public class KucaValidationAspect implements Ordered {
     public void pointcut() {
     }
 
-    @Before(value = "pointcut()")
-    public void before(final JoinPoint joinPoint) {
-        Object[] args = joinPoint.getArgs();
+    /**
+     * 环绕通知
+     *
+     * @param point point
+     * @return {@link Object }
+     * @throws Throwable throwable
+     */
+    @Around(value = "pointcut()")
+    public Object doAround(final ProceedingJoinPoint point) throws Throwable {
+        validParams(point);
+        Object proceed = point.proceed();
+        validReturn(point, proceed);
+        return proceed;
+    }
+
+    /**
+     * 校验入参
+     */
+    private void validParams(final ProceedingJoinPoint point) {
+        Object[] args = point.getArgs();
         if (ArrayUtils.isEmpty(args)) {
             return;
         }
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        MethodSignature signature = (MethodSignature) point.getSignature();
         Method method = signature.getMethod();
         if (method.getParameterCount() <= 0) {
             return;
@@ -39,6 +56,16 @@ public class KucaValidationAspect implements Ordered {
             Class<?> type = parameter.getType();
             KucaValidationUtils.valid(parameter, type.cast(args[i]));
         }
+    }
+
+    /**
+     * 校验返回值
+     */
+    private void validReturn(final ProceedingJoinPoint point, Object value) {
+        MethodSignature signature = (MethodSignature) point.getSignature();
+        Method method = signature.getMethod();
+        Class<?> returnType = method.getReturnType();
+        KucaValidationUtils.valid(value, returnType);
     }
 
     @Override
