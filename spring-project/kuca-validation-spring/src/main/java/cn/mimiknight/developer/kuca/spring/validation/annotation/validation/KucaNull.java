@@ -18,7 +18,7 @@ import java.lang.annotation.Target;
  */
 @KucaConstraint(validatedBy = {NullValidator.class})
 @Documented
-@Target(value = {ElementType.FIELD, ElementType.LOCAL_VARIABLE})
+@Target(value = {ElementType.FIELD, ElementType.LOCAL_VARIABLE, ElementType.PARAMETER})
 @Retention(value = RetentionPolicy.RUNTIME)
 @Repeatable(value = KucaNull.List.class)
 public @interface KucaNull {
@@ -51,7 +51,7 @@ public @interface KucaNull {
      */
     int order() default -1;
 
-    @Target(value = {ElementType.FIELD, ElementType.LOCAL_VARIABLE})
+    @Target(value = {ElementType.FIELD, ElementType.LOCAL_VARIABLE, ElementType.PARAMETER})
     @Retention(RetentionPolicy.RUNTIME)
     @Documented
     @interface List {

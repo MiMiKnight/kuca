@@ -30,16 +30,13 @@ public class KucaValidationAspect implements Ordered {
         }
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
-        int parameterCount = method.getParameterCount();
-        if (parameterCount <= 0) {
+        if (method.getParameterCount() <= 0) {
             return;
         }
         Parameter[] parameters = method.getParameters();
         for (int i = 0; i < parameters.length; i++) {
-            Parameter parameter = parameters[i];
-            KucaValidationUtils.valid(parameter, args[i]);
+            KucaValidationUtils.valid(parameters[i], args[i]);
         }
-        log.info("ValidationAspect...before()...");
     }
 
     @Override

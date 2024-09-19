@@ -18,7 +18,7 @@ import java.lang.annotation.Target;
  */
 @KucaConstraint(validatedBy = {AssertFalseValidator.class})
 @Documented
-@Target(value = {ElementType.FIELD, ElementType.LOCAL_VARIABLE})
+@Target(value = {ElementType.FIELD, ElementType.LOCAL_VARIABLE, ElementType.PARAMETER})
 @Retention(value = RetentionPolicy.RUNTIME)
 @Repeatable(value = KucaAssertFalse.List.class)
 public @interface KucaAssertFalse {
@@ -52,7 +52,7 @@ public @interface KucaAssertFalse {
      */
     int order() default -1;
 
-    @Target(value = {ElementType.FIELD, ElementType.LOCAL_VARIABLE})
+    @Target(value = {ElementType.FIELD, ElementType.LOCAL_VARIABLE, ElementType.PARAMETER})
     @Retention(RetentionPolicy.RUNTIME)
     @Documented
     public @interface List {

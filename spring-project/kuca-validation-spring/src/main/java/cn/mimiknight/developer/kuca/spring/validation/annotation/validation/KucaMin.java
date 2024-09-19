@@ -18,7 +18,7 @@ import java.lang.annotation.Target;
  */
 @KucaConstraint(validatedBy = {MinValidator.class})
 @Documented
-@Target(value = {ElementType.FIELD, ElementType.LOCAL_VARIABLE})
+@Target(value = {ElementType.FIELD, ElementType.LOCAL_VARIABLE, ElementType.PARAMETER})
 @Retention(value = RetentionPolicy.RUNTIME)
 @Repeatable(value = KucaMin.List.class)
 public @interface KucaMin {
@@ -67,7 +67,7 @@ public @interface KucaMin {
      */
     int order() default -1;
 
-    @Target(value = {ElementType.FIELD, ElementType.LOCAL_VARIABLE})
+    @Target(value = {ElementType.FIELD, ElementType.LOCAL_VARIABLE, ElementType.PARAMETER})
     @Retention(RetentionPolicy.RUNTIME)
     @Documented
     @interface List {
