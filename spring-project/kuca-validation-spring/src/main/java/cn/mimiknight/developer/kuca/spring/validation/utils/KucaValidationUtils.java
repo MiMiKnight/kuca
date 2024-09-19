@@ -51,19 +51,6 @@ public final class KucaValidationUtils {
     }
 
     /**
-     * 是否为基本数据类型或者值为null
-     *
-     * @param target target
-     * @return boolean
-     */
-    public static boolean isPrimitiveOrNull(Object target) {
-        if (Objects.isNull(target)) {
-            return true;
-        }
-        return target.getClass().isPrimitive();
-    }
-
-    /**
      * 获取约束注解
      *
      * @param annotations annotations
