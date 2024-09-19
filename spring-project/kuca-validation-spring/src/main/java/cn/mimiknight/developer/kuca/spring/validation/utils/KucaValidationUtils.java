@@ -75,7 +75,7 @@ public final class KucaValidationUtils {
      * @param target 目标参数
      * @param value  参数值
      */
-    public static void valid(Parameter target, Object value) {
+    public static <V> void valid(Parameter target, V value) {
         if (Objects.isNull(target)) {
             return;
         }
@@ -106,7 +106,7 @@ public final class KucaValidationUtils {
      * @param value                 value
      * @param constraintAnnotations constraint annotations
      */
-    private static void valid(Parameter target, Object value, List<Annotation> constraintAnnotations) {
+    private static <V> void valid(Parameter target, V value, List<Annotation> constraintAnnotations) {
         if (CollectionUtils.isEmpty(constraintAnnotations)) {
             return;
         }

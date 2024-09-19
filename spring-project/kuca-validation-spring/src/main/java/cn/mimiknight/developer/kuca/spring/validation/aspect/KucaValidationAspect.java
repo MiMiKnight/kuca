@@ -35,7 +35,9 @@ public class KucaValidationAspect implements Ordered {
         }
         Parameter[] parameters = method.getParameters();
         for (int i = 0; i < parameters.length; i++) {
-            KucaValidationUtils.valid(parameters[i], args[i]);
+            Parameter parameter = parameters[i];
+            Class<?> type = parameter.getType();
+            KucaValidationUtils.valid(parameter, type.cast(args[i]));
         }
     }
 
