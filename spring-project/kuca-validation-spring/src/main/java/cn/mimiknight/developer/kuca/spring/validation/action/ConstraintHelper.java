@@ -43,18 +43,13 @@ public class ConstraintHelper {
      */
     public static <A extends Annotation> boolean isConstraintAnnotation(A annotation) {
         Assert.notNull(annotation, "Parameter must not be null.");
-
-        Class<?> clazz = annotation.getClass();
-        // 目标注解不是注解类型，则非校验注解
-        if (!clazz.isAnnotation()) {
-            return false;
-        }
+        Class<? extends Annotation> type = annotation.annotationType();
         // 目标注解没有被指定注解修饰，则非校验注解
-        if (!clazz.isAnnotationPresent(KucaConstraint.class)) {
+        if (!type.isAnnotationPresent(KucaConstraint.class)) {
             return false;
         }
         // 如果为校验注解，则Validator不允许为空
-        KucaConstraint constraint = clazz.getDeclaredAnnotation(KucaConstraint.class);
+        KucaConstraint constraint = type.getDeclaredAnnotation(KucaConstraint.class);
         if (ArrayUtils.isEmpty(constraint.validatedBy())) {
             return false;
         }
@@ -80,8 +75,8 @@ public class ConstraintHelper {
      * @return {@link List }<{@link ConstraintValidator }<{@link A }, {@link V }>>
      */
     public static <A extends Annotation, V> List<ConstraintValidator<A, V>> getValidators(A annotation) {
-        Class<? extends Annotation> clazz = annotation.getClass();
-        KucaConstraint constraint = clazz.getDeclaredAnnotation(KucaConstraint.class);
+        Class<? extends Annotation> type = annotation.annotationType();
+        KucaConstraint constraint = type.getDeclaredAnnotation(KucaConstraint.class);
         Class<? extends ConstraintValidator<?, ?>>[] validatedBy = constraint.validatedBy();
 
         return Arrays.stream(validatedBy).map(v -> {
