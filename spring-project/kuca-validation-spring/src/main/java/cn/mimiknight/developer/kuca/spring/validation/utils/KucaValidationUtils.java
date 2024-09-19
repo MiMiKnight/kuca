@@ -51,6 +51,20 @@ public final class KucaValidationUtils {
     }
 
     /**
+     * 指定类是否被{@link KucaValidated}
+     * 注解修饰
+     *
+     * @param type type
+     * @return boolean
+     */
+    public static boolean isValidated(Class<?> type) {
+        if (Objects.isNull(type)) {
+            return false;
+        }
+        return type.isAnnotationPresent(KucaValidated.class);
+    }
+
+    /**
      * 获取约束注解
      *
      * @param annotations annotations
@@ -93,7 +107,9 @@ public final class KucaValidationUtils {
             valid(target, value, constraintAnnotations);
         }
         // 嵌套校验
-        valid(value, type);
+        if (isValidated(type)) {
+            valid(value, type);
+        }
     }
 
     /**
@@ -121,8 +137,9 @@ public final class KucaValidationUtils {
                 valid(field, fieldValue, constraintAnnotations);
             }
             // 嵌套校验
-            if (field.isAnnotationPresent(KucaValidated.class)) {
-                valid(fieldValue, field.getType());
+            Class<?> fieldType = field.getType();
+            if (isValidated(field) && isValidated(fieldType)) {
+                valid(fieldValue, fieldType);
             }
         }
     }
