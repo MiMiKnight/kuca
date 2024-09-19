@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
  */
 @Documented
 @Retention(value = RetentionPolicy.RUNTIME)
-@Target(value = {ElementType.TYPE, ElementType.METHOD, ElementType.PARAMETER})
+@Target(value = {ElementType.TYPE, ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD})
 public @interface KucaValidated {
 
     String[] groups() default {};
