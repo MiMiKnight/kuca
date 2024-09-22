@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>cn.mimiknight.developer</groupId>
+        <artifactId>mmk-developer-bom</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>cn.mimiknight.developer.kuca</groupId>
+    <artifactId>kuca-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>kuca-parent</name>
+    <description>kuca framework</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!--revision 项目版本号-->
+        <revision>1.0.0-SNAPSHOT</revision>
+    </properties>
+
+    <modules>
+        <module>proto-project/kuca-detach</module>
+        <module>proto-project/kuca-common-api</module>
+        <module>proto-project/kuca-errorcode-api</module>
+        <module>proto-project/kuca-errorcode-processor</module>
+        <module>spring-project/kuca-ecology-spring</module>
+        <module>spring-project/kuca-appeasy-spring</module>
+        <module>spring-project/kuca-validation-spring</module>
+        <module>spring-project/kuca-common-api-spring</module>
+        <module>spring-boot-project/kuca-spring-boot-autoconfigure</module>
+        <module>spring-boot-project/kuca-errorcode-boot-starter</module>
+        <module>spring-boot-project/kuca-appeasy-boot-starter</module>
+        <module>spring-boot-project/kuca-ecology-boot-starter</module>
+        <module>kuca-dependencies</module>
+    </modules>
+
+    <build>
+        <plugins>
+            <!--versions-maven-plugin-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>${versions-maven-plugin.version}</version>
+                <configuration>
+                    <generateBackupPoms>true</generateBackupPoms>
+                    <newVersion>${revision}</newVersion>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
