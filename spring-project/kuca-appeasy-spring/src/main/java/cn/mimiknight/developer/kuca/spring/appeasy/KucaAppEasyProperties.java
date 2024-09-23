@@ -29,6 +29,26 @@ public class KucaAppEasyProperties {
      */
     private ExceptionHandlerConfig exceptionHandler = new ExceptionHandlerConfig();
 
+    /**
+     * 异常处理器配置
+     */
+    private DatabaseConfig database = new DatabaseConfig();
+
+    @Getter
+    @Setter
+    public static class DatabaseConfig {
+
+        /**
+         * 数据库日期格式
+         */
+        private String dateTimeFormat = "yyyy-MM-dd HH:mm:ss.SSSSSSSSS";
+
+        /**
+         * 数据库时区
+         */
+        private String timezone = "GMT";
+    }
+
     @Getter
     @Setter
     public static class ExceptionHandlerConfig {
