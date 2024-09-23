@@ -225,7 +225,7 @@ public class KucaGlobalExceptionHandlerAdvice implements Ordered {
     @ExceptionHandler(value = KucaBizException.class)
     public KucaServiceResponse handle(KucaBizException e) {
         log.error(KucaLogUtils.buildExceptionLogTip(e));
-        return KucaAppEasyUtils.buildServiceResponse(e.getErrorReturn());
+        return KucaAppEasyUtils.buildServiceResponse(e.getErrorReturn(), Object::new, e.getArgs());
     }
 
 }
