@@ -1,15 +1,18 @@
 package cn.mimiknight.developer.kuca.spring.appeasy.utils;
 
+import cn.mimiknight.developer.kuca.proto.api.common.utils.KucaUtils;
 import cn.mimiknight.developer.kuca.proto.api.errorcode.model.standard.IKucaErrorReturn;
 import cn.mimiknight.developer.kuca.spring.api.common.utils.KucaResourceLoadUtils;
 import cn.mimiknight.developer.kuca.spring.api.common.utils.KucaSpringContextUtils;
 import cn.mimiknight.developer.kuca.spring.appeasy.KucaAppEasyProperties;
+import cn.mimiknight.developer.kuca.spring.appeasy.constant.KucaAppEasyConstant;
 import cn.mimiknight.developer.kuca.spring.appeasy.exception.KucaServiceException;
 import cn.mimiknight.developer.kuca.spring.appeasy.model.response.KucaServiceResponse;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.slf4j.MDC;
 
 import java.io.File;
 import java.io.IOException;
@@ -240,6 +243,34 @@ public final class KucaAppEasyUtils {
         KucaAppEasyProperties config = KucaSpringContextUtils.getBean(KucaAppEasyProperties.class);
         String location = config.getErrorCode().getConfigLocation();
         return loadErrorCodeXml(location);
+    }
+
+    /**
+     * 设置线程日志跟踪id
+     */
+    public static void setThreadTraceId(String traceId) {
+        MDC.put(KucaAppEasyConstant.Log.TRACE_ID_KEY, traceId);
+    }
+
+    /**
+     * 创建日志跟踪id
+     */
+    public static String createTraceId() {
+        return KucaUtils.randomDateId();
+    }
+
+    /**
+     * 设置线程日志跟踪id
+     */
+    public static void setThreadTraceId() {
+        setThreadTraceId(createTraceId());
+    }
+
+    /**
+     * 清理线程日志跟踪id
+     */
+    public static void clearThreadTraceId() {
+        MDC.clear();
     }
 
 }

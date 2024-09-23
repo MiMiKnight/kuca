@@ -12,7 +12,7 @@ import cn.mimiknight.developer.kuca.spring.appeasy.KucaAppEasyProperties;
 public interface KucaAppEasyConstant {
 
 
-    interface DB {
+    interface Database {
 
         /**
          * 数据库时区
@@ -23,5 +23,12 @@ public interface KucaAppEasyConstant {
          * 数据库时间格式
          */
         String DATE_TIME_FORMAT = KucaSpringContextUtils.getBean(KucaAppEasyProperties.class).getDatabase().getDateTimeFormat();
+    }
+
+    interface Log {
+        /**
+         * 日志跟踪ID键名
+         */
+        String TRACE_ID_KEY = KucaSpringContextUtils.getBean(KucaAppEasyProperties.class).getLog().getTraceIdKey();
     }
 }

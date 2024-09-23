@@ -30,9 +30,25 @@ public class KucaAppEasyProperties {
     private ExceptionHandlerConfig exceptionHandler = new ExceptionHandlerConfig();
 
     /**
-     * 异常处理器配置
+     * 数据库配置
      */
     private DatabaseConfig database = new DatabaseConfig();
+
+    /**
+     * 日志配置
+     */
+    private LogConfig log = new LogConfig();
+
+    @Getter
+    @Setter
+    public static class LogConfig {
+
+        /**
+         * 日志跟踪ID键名
+         */
+        private String traceIdKey = "TRACE_ID";
+    }
+
 
     @Getter
     @Setter

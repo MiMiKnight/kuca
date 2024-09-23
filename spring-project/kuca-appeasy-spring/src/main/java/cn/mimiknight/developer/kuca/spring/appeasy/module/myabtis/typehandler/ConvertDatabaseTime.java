@@ -16,12 +16,12 @@ public interface ConvertDatabaseTime<T> {
     /**
      * 数据库时间时区
      */
-    String DB_TIME_ZONE = KucaAppEasyConstant.DB.TIME_ZONE;
+    String DB_TIME_ZONE = KucaAppEasyConstant.Database.TIME_ZONE;
 
     /**
      * 数据库日期格式
      */
-    String DATE_TIME_FORMAT = KucaAppEasyConstant.DB.DATE_TIME_FORMAT;
+    String DATE_TIME_FORMAT = KucaAppEasyConstant.Database.DATE_TIME_FORMAT;
 
     /**
      * 默认日期格式化对象
