@@ -1,6 +1,0 @@
-#!/bin/bash
-
-ruby -rubygems -e 'require "jekyll-import";
-    JekyllImport::Importers::RSS.run({
-      "source" => "https://blog.mybatis.org/feeds/posts/default?alt=rss"
-    })'
