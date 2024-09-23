@@ -10,6 +10,9 @@ import cn.mimiknight.developer.kuca.spring.appeasy.model.response.KucaServiceRes
 import cn.mimiknight.developer.kuca.spring.appeasy.utils.KucaAppEasyUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.Ordered;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
@@ -17,6 +20,8 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
+
+import java.util.function.Supplier;
 
 /**
  * kuca global exception handler advice
@@ -26,13 +31,28 @@ import org.springframework.web.servlet.NoHandlerFoundException;
  */
 @Slf4j
 @RestControllerAdvice
-public class KucaGlobalExceptionHandlerAdvice implements Ordered {
+public class KucaGlobalExceptionHandlerAdvice implements Ordered, ApplicationContextAware {
 
     private static final String API_PATH_KEY = "api_path";
+
+    private ApplicationContext context;
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.context = applicationContext;
+    }
 
     @Override
     public int getOrder() {
         return Byte.MAX_VALUE;
+    }
+
+    private KucaServiceResponse run(Supplier<KucaServiceResponse> supplier) {
+        try {
+            return supplier.get();
+        } catch (Exception ex) {
+            return handle(ex);
+        }
     }
 
     /**
@@ -90,8 +110,9 @@ public class KucaGlobalExceptionHandlerAdvice implements Ordered {
      * @return {@link KucaServiceResponse}
      */
     @ExceptionHandler(value = NoHandlerFoundException.class)
-    public KucaServiceResponse handle(NoHandlerFoundException e, HttpServletRequest request) {
+    public KucaServiceResponse handle(NoHandlerFoundException e) {
         log.error(KucaLogUtils.buildExceptionLogTip(e));
+        HttpServletRequest request = context.getBean(HttpServletRequest.class);
         return KucaAppEasyUtils.buildApi404ServiceResponse(() ->
                 KucaMsgPayloadUtils.load(API_PATH_KEY, request.getRequestURI())
                         .finished()
@@ -105,8 +126,9 @@ public class KucaGlobalExceptionHandlerAdvice implements Ordered {
      * @return {@link KucaServiceResponse}
      */
     @ExceptionHandler(value = HttpMediaTypeNotSupportedException.class)
-    public KucaServiceResponse handle(HttpMediaTypeNotSupportedException e, HttpServletRequest request) {
+    public KucaServiceResponse handle(HttpMediaTypeNotSupportedException e) {
         log.error(KucaLogUtils.buildExceptionLogTip(e));
+        HttpServletRequest request = context.getBean(HttpServletRequest.class);
         return KucaAppEasyUtils.buildMediaTypeNotSupportedServiceResponse(() ->
                 KucaMsgPayloadUtils.load(API_PATH_KEY, request.getRequestURI())
                         .finished()
@@ -120,8 +142,9 @@ public class KucaGlobalExceptionHandlerAdvice implements Ordered {
      * @return {@link KucaServiceResponse}
      */
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
-    public KucaServiceResponse handle(HttpMessageNotReadableException e, HttpServletRequest request) {
+    public KucaServiceResponse handle(HttpMessageNotReadableException e) {
         log.error(KucaLogUtils.buildExceptionLogTip(e));
+        HttpServletRequest request = context.getBean(HttpServletRequest.class);
         return KucaAppEasyUtils.buildHttpMessageNotReadableServiceResponse(() ->
                 KucaMsgPayloadUtils.load(API_PATH_KEY, request.getRequestURI())
                         .finished()
@@ -135,8 +158,9 @@ public class KucaGlobalExceptionHandlerAdvice implements Ordered {
      * @return {@link KucaServiceResponse}
      */
     @ExceptionHandler(value = HttpRequestMethodNotSupportedException.class)
-    public KucaServiceResponse handle(HttpRequestMethodNotSupportedException e, HttpServletRequest request) {
+    public KucaServiceResponse handle(HttpRequestMethodNotSupportedException e) {
         log.error(KucaLogUtils.buildExceptionLogTip(e));
+        HttpServletRequest request = context.getBean(HttpServletRequest.class);
         return KucaAppEasyUtils.buildHttpRequestMethodNotSupportedServiceResponse(() ->
                 KucaMsgPayloadUtils.load("method", request.getMethod())
                         .load(API_PATH_KEY, request.getRequestURI())
@@ -151,8 +175,9 @@ public class KucaGlobalExceptionHandlerAdvice implements Ordered {
      * @return {@link KucaServiceResponse }
      */
     @ExceptionHandler(value = KucaErrorCodeUndefinedException.class)
-    public KucaServiceResponse handle(KucaErrorCodeUndefinedException e, HttpServletRequest request) {
+    public KucaServiceResponse handle(KucaErrorCodeUndefinedException e) {
         log.error(KucaLogUtils.buildExceptionLogTip(e));
+        HttpServletRequest request = context.getBean(HttpServletRequest.class);
         return KucaAppEasyUtils.buildErrorCodeUndefinedServiceResponse(() ->
                 KucaMsgPayloadUtils.load("error_code", e.getErrorCode())
                         .load(API_PATH_KEY, request.getRequestURI())
@@ -166,8 +191,9 @@ public class KucaGlobalExceptionHandlerAdvice implements Ordered {
      * @return {@link KucaServiceResponse }
      */
     @ExceptionHandler(value = KucaErrorCodeReuseException.class)
-    public KucaServiceResponse handle(KucaErrorCodeReuseException e, HttpServletRequest request) {
+    public KucaServiceResponse handle(KucaErrorCodeReuseException e) {
         log.error(KucaLogUtils.buildExceptionLogTip(e));
+        HttpServletRequest request = context.getBean(HttpServletRequest.class);
         return KucaAppEasyUtils.buildErrorCodeReuseServiceResponse(() ->
                 KucaMsgPayloadUtils.load("error_code", e.getErrorCode())
                         .load("location", e.getLocation())
