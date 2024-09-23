@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="https://kuca.mimiknight.cn/xml/schema/error-code"
-           xmlns="https://kuca.mimiknight.cn/xml/schema/error-code"
+           targetNamespace="https://kuca.mimiknight.cn/schema/xsd/error-code"
+           xmlns="https://kuca.mimiknight.cn/schema/xsd/error-code"
            elementFormDefault="qualified">
 
     <!-- definition of complex elements -->
