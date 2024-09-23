@@ -3,6 +3,7 @@ package cn.mimiknight.developer.kuca.spring.appeasy.aspect;
 import cn.mimiknight.developer.kuca.proto.api.common.utils.KucaLogUtils;
 import cn.mimiknight.developer.kuca.proto.api.common.utils.KucaMsgPayloadUtils;
 import cn.mimiknight.developer.kuca.proto.api.errorcode.exception.KucaBizException;
+import cn.mimiknight.developer.kuca.proto.api.errorcode.exception.KucaErrorCodeReuseException;
 import cn.mimiknight.developer.kuca.proto.api.errorcode.exception.KucaErrorCodeUndefinedException;
 import cn.mimiknight.developer.kuca.spring.appeasy.exception.KucaServiceException;
 import cn.mimiknight.developer.kuca.spring.appeasy.model.response.KucaServiceResponse;
@@ -92,7 +93,8 @@ public class KucaGlobalExceptionHandlerAdvice implements Ordered {
     public KucaServiceResponse handle(NoHandlerFoundException e, HttpServletRequest request) {
         log.error(KucaLogUtils.buildExceptionLogTip(e));
         return KucaAppEasyUtils.buildApi404ServiceResponse(() ->
-                KucaMsgPayloadUtils.load(API_PATH_KEY, request.getRequestURI()).finished()
+                KucaMsgPayloadUtils.load(API_PATH_KEY, request.getRequestURI())
+                        .finished()
         );
     }
 
@@ -106,7 +108,8 @@ public class KucaGlobalExceptionHandlerAdvice implements Ordered {
     public KucaServiceResponse handle(HttpMediaTypeNotSupportedException e, HttpServletRequest request) {
         log.error(KucaLogUtils.buildExceptionLogTip(e));
         return KucaAppEasyUtils.buildMediaTypeNotSupportedServiceResponse(() ->
-                KucaMsgPayloadUtils.load(API_PATH_KEY, request.getRequestURI()).finished()
+                KucaMsgPayloadUtils.load(API_PATH_KEY, request.getRequestURI())
+                        .finished()
         );
     }
 
@@ -120,7 +123,8 @@ public class KucaGlobalExceptionHandlerAdvice implements Ordered {
     public KucaServiceResponse handle(HttpMessageNotReadableException e, HttpServletRequest request) {
         log.error(KucaLogUtils.buildExceptionLogTip(e));
         return KucaAppEasyUtils.buildHttpMessageNotReadableServiceResponse(() ->
-                KucaMsgPayloadUtils.load(API_PATH_KEY, request.getRequestURI()).finished()
+                KucaMsgPayloadUtils.load(API_PATH_KEY, request.getRequestURI())
+                        .finished()
         );
     }
 
@@ -135,7 +139,8 @@ public class KucaGlobalExceptionHandlerAdvice implements Ordered {
         log.error(KucaLogUtils.buildExceptionLogTip(e));
         return KucaAppEasyUtils.buildHttpRequestMethodNotSupportedServiceResponse(() ->
                 KucaMsgPayloadUtils.load("method", request.getMethod())
-                        .load(API_PATH_KEY, request.getRequestURI()).finished()
+                        .load(API_PATH_KEY, request.getRequestURI())
+                        .finished()
         );
     }
 
@@ -146,9 +151,28 @@ public class KucaGlobalExceptionHandlerAdvice implements Ordered {
      * @return {@link KucaServiceResponse }
      */
     @ExceptionHandler(value = KucaErrorCodeUndefinedException.class)
-    public KucaServiceResponse handle(KucaErrorCodeUndefinedException e) {
+    public KucaServiceResponse handle(KucaErrorCodeUndefinedException e, HttpServletRequest request) {
         log.error(KucaLogUtils.buildExceptionLogTip(e));
-        return KucaAppEasyUtils.buildErrorCodeUndefinedServiceResponse(e);
+        return KucaAppEasyUtils.buildErrorCodeUndefinedServiceResponse(() ->
+                KucaMsgPayloadUtils.load("error_code", e.getErrorCode())
+                        .load(API_PATH_KEY, request.getRequestURI())
+                        .finished());
+    }
+
+    /**
+     * 错误码重复使用异常处理
+     *
+     * @param e {@link KucaErrorCodeReuseException}异常
+     * @return {@link KucaServiceResponse }
+     */
+    @ExceptionHandler(value = KucaErrorCodeReuseException.class)
+    public KucaServiceResponse handle(KucaErrorCodeReuseException e, HttpServletRequest request) {
+        log.error(KucaLogUtils.buildExceptionLogTip(e));
+        return KucaAppEasyUtils.buildErrorCodeReuseServiceResponse(() ->
+                KucaMsgPayloadUtils.load("error_code", e.getErrorCode())
+                        .load("location", e.getLocation())
+                        .load(API_PATH_KEY, request.getRequestURI())
+                        .finished());
     }
 
     /**

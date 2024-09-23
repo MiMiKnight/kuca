@@ -5,28 +5,31 @@ import lombok.Getter;
 import java.io.Serial;
 
 /**
- * kuca error code not found exception
+ * 错误码重复使用异常
  *
  * @author MiMiKnight victor2015yhm@gmail.com
- * @date 2024-09-22 20:48:40
+ * @date 2024-09-23 13:17:43
  */
 @Getter
-public class KucaErrorCodeUndefinedException extends RuntimeException {
+public class KucaErrorCodeReuseException extends RuntimeException {
 
     @Serial
     private static final long serialVersionUID = -1404195234238113609L;
 
-    private final String errorCode;
-
     /**
-     * kuca error code undefined exception
-     *
-     * @param message   message
-     * @param errorCode errorCode
+     * error code
      */
-    public KucaErrorCodeUndefinedException(String message, String errorCode) {
+    private final String errorCode;
+    
+    /**
+     * location
+     */
+    private final String location;
+
+    public KucaErrorCodeReuseException(String message, String errorCode, String location) {
         super(message);
         this.errorCode = errorCode;
+        this.location = location;
     }
 
 }

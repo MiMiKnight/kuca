@@ -1,8 +1,5 @@
 package cn.mimiknight.developer.kuca.spring.appeasy.utils;
 
-import cn.mimiknight.developer.kuca.proto.api.errorcode.AbstractKucaErrorReturnFactory;
-import cn.mimiknight.developer.kuca.proto.api.errorcode.exception.KucaErrorCodeException;
-import cn.mimiknight.developer.kuca.proto.api.errorcode.exception.KucaErrorCodeUndefinedException;
 import cn.mimiknight.developer.kuca.proto.api.errorcode.model.standard.IKucaErrorReturn;
 import cn.mimiknight.developer.kuca.spring.api.common.utils.KucaResourceLoadUtils;
 import cn.mimiknight.developer.kuca.spring.api.common.utils.KucaSpringContextUtils;
@@ -19,7 +16,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.ZonedDateTime;
 import java.util.Objects;
-import java.util.UUID;
 import java.util.function.Supplier;
 
 /**
@@ -52,21 +48,6 @@ public final class KucaAppEasyUtils {
     public static String getFullErrorCode(String code) {
         String appId = getAppId();
         return (StringUtils.isBlank(appId) ? "" : appId) + code;
-    }
-
-    /**
-     * load error return
-     *
-     * @param code code
-     * @return {@link IKucaErrorReturn }
-     */
-    public static IKucaErrorReturn loadErrorReturn(String code) {
-        AbstractKucaErrorReturnFactory errorReturnFactory = KucaSpringContextUtils.getBean(AbstractKucaErrorReturnFactory.class);
-        try {
-            return errorReturnFactory.getErrorReturn(code);
-        } catch (KucaErrorCodeException e) {
-            throw new KucaErrorCodeUndefinedException(code);
-        }
     }
 
     /**
@@ -115,12 +96,13 @@ public final class KucaAppEasyUtils {
     /**
      * 构建服务响应
      *
-     * @param errorCode 错误码
-     * @param data      数据
+     * @param errorReturn error return
+     * @param data        数据
+     * @param args        args
      * @return {@link KucaServiceResponse}
      */
-    public static KucaServiceResponse buildServiceResponse(String errorCode, Supplier<Object> data, Object... args) {
-        return buildServiceResponse(loadErrorReturn(errorCode), data.get(), args);
+    public static KucaServiceResponse buildServiceResponse(IKucaErrorReturn errorReturn, Supplier<Object> data, Object... args) {
+        return buildServiceResponse(errorReturn, data.get(), args);
     }
 
     /**
@@ -132,7 +114,8 @@ public final class KucaAppEasyUtils {
     public static KucaServiceResponse buildOkServiceResponse(Object data) {
         KucaAppEasyProperties config = KucaSpringContextUtils.getBean(KucaAppEasyProperties.class);
         String errorCode = config.getErrorCode().getOk();
-        return buildServiceResponse(errorCode, () -> data);
+        IKucaErrorReturn errorReturn = KucaERUtils.load(errorCode);
+        return buildServiceResponse(errorReturn, () -> data);
     }
 
     /**
@@ -143,7 +126,8 @@ public final class KucaAppEasyUtils {
     public static KucaServiceResponse buildBadServiceResponse() {
         KucaAppEasyProperties config = KucaSpringContextUtils.getBean(KucaAppEasyProperties.class);
         String errorCode = config.getErrorCode().getBad();
-        return buildServiceResponse(errorCode, Object::new);
+        IKucaErrorReturn errorReturn = KucaERUtils.load(errorCode);
+        return buildServiceResponse(errorReturn, Object::new);
     }
 
     /**
@@ -155,7 +139,8 @@ public final class KucaAppEasyUtils {
     public static KucaServiceResponse buildApi404ServiceResponse(Supplier<Object> data) {
         KucaAppEasyProperties config = KucaSpringContextUtils.getBean(KucaAppEasyProperties.class);
         String errorCode = config.getErrorCode().getApi404();
-        return buildServiceResponse(errorCode, data);
+        IKucaErrorReturn errorReturn = KucaERUtils.load(errorCode);
+        return buildServiceResponse(errorReturn, data.get());
     }
 
     /**
@@ -166,7 +151,8 @@ public final class KucaAppEasyUtils {
     public static KucaServiceResponse buildNullPointServiceResponse() {
         KucaAppEasyProperties config = KucaSpringContextUtils.getBean(KucaAppEasyProperties.class);
         String errorCode = config.getErrorCode().getNullPoint();
-        return buildServiceResponse(errorCode, Object::new);
+        IKucaErrorReturn errorReturn = KucaERUtils.load(errorCode);
+        return buildServiceResponse(errorReturn, Object::new);
     }
 
     /**
@@ -177,7 +163,8 @@ public final class KucaAppEasyUtils {
     public static KucaServiceResponse buildMediaTypeNotSupportedServiceResponse(Supplier<Object> data) {
         KucaAppEasyProperties config = KucaSpringContextUtils.getBean(KucaAppEasyProperties.class);
         String errorCode = config.getErrorCode().getMediaTypeNotSupported();
-        return buildServiceResponse(errorCode, data);
+        IKucaErrorReturn errorReturn = KucaERUtils.load(errorCode);
+        return buildServiceResponse(errorReturn, data.get());
     }
 
     /**
@@ -188,7 +175,8 @@ public final class KucaAppEasyUtils {
     public static KucaServiceResponse buildHttpMessageNotReadableServiceResponse(Supplier<Object> data) {
         KucaAppEasyProperties config = KucaSpringContextUtils.getBean(KucaAppEasyProperties.class);
         String errorCode = config.getErrorCode().getHttpMessageNotReadable();
-        return buildServiceResponse(errorCode, data);
+        IKucaErrorReturn errorReturn = KucaERUtils.load(errorCode);
+        return buildServiceResponse(errorReturn, data.get());
     }
 
     /**
@@ -199,7 +187,8 @@ public final class KucaAppEasyUtils {
     public static KucaServiceResponse buildHttpRequestMethodNotSupportedServiceResponse(Supplier<Object> data) {
         KucaAppEasyProperties config = KucaSpringContextUtils.getBean(KucaAppEasyProperties.class);
         String errorCode = config.getErrorCode().getHttpRequestMethodNotSupported();
-        return buildServiceResponse(errorCode, data);
+        IKucaErrorReturn errorReturn = KucaERUtils.load(errorCode);
+        return buildServiceResponse(errorReturn, data.get());
     }
 
     /**
@@ -207,21 +196,23 @@ public final class KucaAppEasyUtils {
      *
      * @return {@link KucaServiceResponse}
      */
-    public static KucaServiceResponse buildErrorCodeUndefinedServiceResponse(KucaErrorCodeUndefinedException e) {
+    public static KucaServiceResponse buildErrorCodeUndefinedServiceResponse(Supplier<Object> data) {
         KucaAppEasyProperties config = KucaSpringContextUtils.getBean(KucaAppEasyProperties.class);
         String errorCode = config.getErrorCode().getErrorCodeUndefined();
-        String sourceErrorCode = e.getMessage();
-        return buildServiceResponse(errorCode, Object::new, sourceErrorCode);
+        IKucaErrorReturn errorReturn = KucaERUtils.load(errorCode);
+        return buildServiceResponse(errorReturn, data.get());
     }
 
-
     /**
-     * UUID
+     * 构建错误码重复使用异常时服务响应
      *
-     * @return {@link String}
+     * @return {@link KucaServiceResponse}
      */
-    public static String uuid() {
-        return UUID.randomUUID().toString().replace("-", "");
+    public static KucaServiceResponse buildErrorCodeReuseServiceResponse(Supplier<Object> data) {
+        KucaAppEasyProperties config = KucaSpringContextUtils.getBean(KucaAppEasyProperties.class);
+        String errorCode = config.getErrorCode().getErrorCodeReuse();
+        IKucaErrorReturn errorReturn = KucaERUtils.load(errorCode);
+        return buildServiceResponse(errorReturn, data.get());
     }
 
 

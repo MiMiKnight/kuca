@@ -103,6 +103,11 @@ public class KucaAppEasyProperties {
          */
         private String errorCodeUndefined;
 
+        /**
+         * 错误码重复使用错误码
+         */
+        private String errorCodeReuse;
+
     }
 
 }
