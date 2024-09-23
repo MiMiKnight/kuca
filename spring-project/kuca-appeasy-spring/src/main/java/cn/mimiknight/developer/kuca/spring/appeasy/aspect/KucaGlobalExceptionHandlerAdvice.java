@@ -10,9 +10,6 @@ import cn.mimiknight.developer.kuca.spring.appeasy.model.response.KucaServiceRes
 import cn.mimiknight.developer.kuca.spring.appeasy.utils.KucaAppEasyUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.Ordered;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
@@ -31,16 +28,9 @@ import java.util.function.Supplier;
  */
 @Slf4j
 @RestControllerAdvice
-public class KucaGlobalExceptionHandlerAdvice implements Ordered, ApplicationContextAware {
+public class KucaGlobalExceptionHandlerAdvice implements Ordered {
 
     private static final String API_PATH_KEY = "api_path";
-
-    private ApplicationContext context;
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.context = applicationContext;
-    }
 
     @Override
     public int getOrder() {
@@ -57,6 +47,8 @@ public class KucaGlobalExceptionHandlerAdvice implements Ordered, ApplicationCon
         try {
             return supplier.get();
         } catch (KucaErrorCodeUndefinedException e) {
+            return handle(e);
+        } catch (Exception e) {
             return handle(e);
         }
     }
@@ -182,10 +174,16 @@ public class KucaGlobalExceptionHandlerAdvice implements Ordered, ApplicationCon
      */
     @ExceptionHandler(value = KucaErrorCodeUndefinedException.class)
     public KucaServiceResponse handle(KucaErrorCodeUndefinedException e) {
-        log.error(KucaLogUtils.buildExceptionLogTip(e));
-        return KucaAppEasyUtils.buildErrorCodeUndefinedServiceResponse(() ->
-                KucaMsgPayloadUtils.load("error_code", e.getErrorCode())
-                        .finished());
+        try {
+            log.error(KucaLogUtils.buildExceptionLogTip(e));
+            return KucaAppEasyUtils.buildErrorCodeUndefinedServiceResponse(() ->
+                    KucaMsgPayloadUtils.load("error_code", e.getErrorCode())
+                            .finished());
+        } catch (KucaErrorCodeUndefinedException ex) {
+            return handle(new Exception("Error Code Undefined", ex));
+        } catch (Exception ex2) {
+            return handle(ex2);
+        }
     }
 
     /**
