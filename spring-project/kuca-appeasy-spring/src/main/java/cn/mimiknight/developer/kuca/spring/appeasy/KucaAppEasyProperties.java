@@ -100,6 +100,11 @@ public class KucaAppEasyProperties {
         private String configLocation = "classpath:error-code-config.xml";
 
         /**
+         * 是否检查错误码重复使用
+         */
+        private boolean checkReuse = false;
+
+        /**
          * 默认OK错误码
          */
         private String ok;

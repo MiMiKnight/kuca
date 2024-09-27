@@ -6,6 +6,7 @@ import cn.mimiknight.developer.kuca.proto.api.errorcode.exception.KucaErrorCodeR
 import cn.mimiknight.developer.kuca.proto.api.errorcode.exception.KucaErrorCodeUndefinedException;
 import cn.mimiknight.developer.kuca.proto.api.errorcode.model.standard.IKucaErrorReturn;
 import cn.mimiknight.developer.kuca.spring.api.common.utils.KucaSpringContextUtils;
+import cn.mimiknight.developer.kuca.spring.appeasy.KucaAppEasyProperties;
 import cn.mimiknight.developer.kuca.spring.appeasy.exception.KucaServiceException;
 import cn.mimiknight.developer.kuca.spring.appeasy.model.KucaERPPair;
 import org.apache.commons.lang3.StringUtils;
@@ -15,6 +16,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 /**
  * 错误码加载工具类
@@ -22,11 +24,22 @@ import java.util.Map;
  * @author MiMiKnight victor2015yhm@gmail.com
  * @date 2024-09-23 14:03:28
  */
-public final class KucaERUtils {
+public class KucaERUtils {
 
     private static final Map<String, KucaERPPair> callRecords = new HashMap<>(128);
 
     private KucaERUtils() {
+    }
+
+    /**
+     * load
+     *
+     * @param code code
+     * @return {@link IKucaErrorReturn }
+     */
+    public static IKucaErrorReturn load(String code) {
+        StackTraceElement stackTrace = Thread.currentThread().getStackTrace()[2];
+        return isCheckErrorCodeReuse(code, () -> checkErrorCodeReuse(code, stackTrace));
     }
 
     /**
@@ -40,7 +53,7 @@ public final class KucaERUtils {
         try {
             return errorReturnFactory.getErrorReturn(code);
         } catch (KucaErrorCodeException e) {
-            throw new KucaErrorCodeUndefinedException("Error Code Undefined Exception",code);
+            throw new KucaErrorCodeUndefinedException("Error Code Undefined Exception", code);
         }
     }
 
@@ -67,15 +80,14 @@ public final class KucaERUtils {
         return stack.getClassName() + ":" + stack.getLineNumber();
     }
 
-
     /**
-     * load
+     * check error code reuse
      *
-     * @param code code
+     * @param code       code
+     * @param stackTrace stack trace
      * @return {@link IKucaErrorReturn }
      */
-    public static IKucaErrorReturn load(String code) {
-        StackTraceElement stackTrace = Thread.currentThread().getStackTrace()[2];
+    private static IKucaErrorReturn checkErrorCodeReuse(String code, StackTraceElement stackTrace) {
         String fingerprint = getCallFingerprint(stackTrace);
         KucaERPPair pair = callRecords.get(code);
         if (null != pair) {
@@ -88,6 +100,23 @@ public final class KucaERUtils {
         IKucaErrorReturn errorReturn = loadErrorReturn(code);
         callRecords.put(code, new KucaERPPair(fingerprint, errorReturn));
         return errorReturn;
+    }
+
+    /**
+     * is check error code reuse
+     *
+     * @param code     code
+     * @param supplier supplier
+     * @return {@link IKucaErrorReturn }
+     */
+    private static IKucaErrorReturn isCheckErrorCodeReuse(String code, Supplier<IKucaErrorReturn> supplier) {
+        // 是否检查错误码重复使用
+        KucaAppEasyProperties config = KucaSpringContextUtils.getBean(KucaAppEasyProperties.class);
+        boolean checkReuse = config.getErrorCode().isCheckReuse();
+        if (!checkReuse) {
+            return loadErrorReturn(code);
+        }
+        return supplier.get();
     }
 
     /**
