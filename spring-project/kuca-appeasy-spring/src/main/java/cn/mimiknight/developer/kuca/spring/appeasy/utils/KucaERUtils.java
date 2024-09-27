@@ -14,8 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 
 /**
@@ -26,7 +25,7 @@ import java.util.function.Supplier;
  */
 public class KucaERUtils {
 
-    private static final Map<String, KucaERPPair> callRecords = new HashMap<>(128);
+    private static final ConcurrentHashMap<String, KucaERPPair> callRecords = new ConcurrentHashMap<>(128);
 
     private KucaERUtils() {
     }
@@ -64,9 +63,7 @@ public class KucaERUtils {
      * @return {@link String }
      */
     private static String getCallFingerprint(StackTraceElement stack) {
-        String result = stack.getClassName() +
-                stack.getMethodName() +
-                stack.getLineNumber();
+        String result = stack.getClassName() + stack.getMethodName() + stack.getLineNumber();
         return sha256(result);
     }
 
