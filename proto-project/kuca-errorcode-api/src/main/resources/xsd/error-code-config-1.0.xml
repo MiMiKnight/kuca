@@ -34,16 +34,15 @@
             <!--HTTP请求方法不支持-->
             <error id="999994" type="405">HTTP Request Method Not Supported</error>
             <!--错误码未找到-->
-            <error id="999993" type="500">The Error Code Not Found</error>
+            <error id="999993" type="500">Error Code Not Found</error>
             <!--错误码重复使用-->
-            <error id="999992" type="500">The Error Code Reuse Error</error>
+            <error id="999992" type="500">The error code reuse</error>
             <!--SQL语法错误-->
-            <error id="999991" type="500_DE">The SQL Syntax Error</error>
+            <error id="999991" type="500_DE">The SQL Syntax invalid</error>
         </module>
         <!--biz-->
         <module id="biz">
-            <error id="110000" type="500_BE">user password invalid</error>
-            <error id="110001" type="500_BE">user not exist</error>
+            <error id="110000" type="500_BE">xxx</error>
         </module>
     </modules>
 
