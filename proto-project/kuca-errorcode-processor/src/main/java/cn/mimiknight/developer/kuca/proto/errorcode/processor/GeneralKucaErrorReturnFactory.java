@@ -5,6 +5,9 @@ import cn.mimiknight.developer.kuca.proto.api.errorcode.model.standard.IKucaErro
 import cn.mimiknight.developer.kuca.proto.api.errorcode.utils.KucaErrorCodeXmlUtils;
 import org.jsoup.nodes.Document;
 
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * general kuca error return factory
  *
@@ -15,14 +18,27 @@ public final class GeneralKucaErrorReturnFactory extends AbstractKucaErrorReturn
 
     private static GeneralKucaErrorReturnFactory factory;
 
+    private final ConcurrentHashMap<String, IKucaErrorReturn> errors = new ConcurrentHashMap<>(128);
+
     /**
      * xml document
      */
     private Document document;
 
+    /**
+     * get error return
+     *
+     * @param code code
+     * @return {@link IKucaErrorReturn }
+     */
     @Override
     public IKucaErrorReturn getErrorReturn(String code) {
-        return KucaErrorCodeXmlUtils.getErrorReturnById(code, document);
+        IKucaErrorReturn errorReturn = errors.get(code);
+        if (Objects.isNull(errorReturn)) {
+            errorReturn = KucaErrorCodeXmlUtils.getErrorReturnById(code, document);
+            errors.put(code, errorReturn);
+        }
+        return errorReturn;
     }
 
     /**
